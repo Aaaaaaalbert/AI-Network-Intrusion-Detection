@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Local / temporary files
+.claude/
+tempCodeRunnerFile.py
+
+# Raw datasets
+*.pcap_ISCX.csv
+dataset/raw/*.csv
+dataset/raw/**/*.csv
+dataset/raw/*.zip
+dataset/raw/**/*.zip
+
+# Processed datasets
+data/processed/
+dataset/processed/*
+!dataset/processed/.gitkeep
+
+# Trained models
+models/*.joblib
+
+# EDA outputs
+results/eda/*
+!results/eda/.gitkeep
