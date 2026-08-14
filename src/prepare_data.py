@@ -20,6 +20,31 @@ from src.column_utils import clean_column_names
 NORMAL_LABELS = {"0", "benign", "normal", "normal."}
 
 
+def read_csv_file(path: Path) -> pd.DataFrame:
+    """Read one CSV and report its path when loading fails."""
+    try:
+        return pd.read_csv(path)
+    except Exception as exc:
+        raise ValueError(f"讀取 CSV 失敗：{path}（{exc}）") from exc
+
+
+def load_csv_directory(input_dir: Path) -> pd.DataFrame:
+    """Recursively load and concatenate CSV files in a stable order."""
+    if not input_dir.exists():
+        raise FileNotFoundError(f"輸入資料夾不存在：{input_dir}")
+    if not input_dir.is_dir():
+        raise NotADirectoryError(f"輸入路徑不是資料夾：{input_dir}")
+
+    csv_files = sorted(
+        (path for path in input_dir.rglob("*") if path.is_file() and path.suffix.lower() == ".csv"),
+        key=lambda path: path.relative_to(input_dir).as_posix().casefold(),
+    )
+    if not csv_files:
+        raise FileNotFoundError(f"輸入資料夾內找不到 CSV：{input_dir}")
+
+    return pd.concat([read_csv_file(path) for path in csv_files], ignore_index=True)
+
+
 def clean_data(frame: pd.DataFrame, label_column: str = "label") -> pd.DataFrame:
     """Clean a raw flow table and add binary ``is_attack`` labels."""
     data = frame.copy()
@@ -127,17 +152,28 @@ def demo_data(rows: int = 200, random_state: int = 42) -> pd.DataFrame:
     })
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
+    """Build the command-line parser."""
     parser = argparse.ArgumentParser(description="準備網路入侵偵測資料")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--input", type=Path, help="原始 CSV 路徑")
+    source.add_argument("--input-dir", type=Path, help="遞迴讀取資料夾內所有 CSV")
     source.add_argument("--demo", action="store_true", help="使用內建示範資料")
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--label-column", default="label")
     parser.add_argument("--test-size", type=float, default=0.2)
-    args = parser.parse_args()
+    return parser
 
-    frame = demo_data() if args.demo else pd.read_csv(args.input)
+
+def main() -> None:
+    args = build_parser().parse_args()
+
+    if args.demo:
+        frame = demo_data()
+    elif args.input_dir is not None:
+        frame = load_csv_directory(args.input_dir)
+    else:
+        frame = read_csv_file(args.input)
     metadata = prepare_dataset(frame, args.output_dir, args.label_column, args.test_size)
     print(f"完成：{metadata['train_rows']} 筆訓練資料、{metadata['test_rows']} 筆測試資料")
     print(f"輸出位置：{args.output_dir.resolve()}")
