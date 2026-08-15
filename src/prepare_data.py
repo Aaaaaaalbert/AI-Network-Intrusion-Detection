@@ -19,11 +19,16 @@ from src.column_utils import clean_column_names
 
 NORMAL_LABELS = {"0", "benign", "normal", "normal."}
 
+# Identifier/metadata columns that are unique (or near-unique) per row.
+# One-hot encoding them would explode into millions of useless columns and
+# they would not generalize to traffic never seen during training anyway.
+NON_FEATURE_COLUMNS = {"flow_id", "source_ip", "destination_ip", "timestamp"}
+
 
 def read_csv_file(path: Path) -> pd.DataFrame:
     """Read one CSV and report its path when loading fails."""
     try:
-        return pd.read_csv(path)
+        return pd.read_csv(path, encoding="latin1")
     except Exception as exc:
         raise ValueError(f"讀取 CSV 失敗：{path}（{exc}）") from exc
 
@@ -62,12 +67,25 @@ def clean_data(frame: pd.DataFrame, label_column: str = "label") -> pd.DataFrame
     return data
 
 
+MAX_CATEGORICAL_CARDINALITY = 100
+
+
 def build_preprocessor(features: pd.DataFrame) -> ColumnTransformer:
     """Build numeric and categorical transformations for a feature table."""
     numeric = features.select_dtypes(include=["number", "bool"]).columns.tolist()
     categorical = [column for column in features.columns if column not in numeric]
     if not numeric and not categorical:
         raise ValueError("資料中沒有可用的特徵欄位")
+
+    high_cardinality = [
+        column for column in categorical
+        if features[column].nunique(dropna=True) > MAX_CATEGORICAL_CARDINALITY
+    ]
+    if high_cardinality:
+        raise ValueError(
+            "以下欄位類別數過多，one-hot encoding 會爆炸式增加欄位、耗盡記憶體，"
+            f"請在前處理階段排除這些欄位：{high_cardinality}"
+        )
 
     transformers = []
     if numeric:
@@ -93,7 +111,8 @@ def prepare_dataset(
     """Clean, split and transform data, then persist reproducible artifacts."""
     data = clean_data(frame, label_column)
     label_column = clean_column_names([label_column])[0]
-    feature_columns = [c for c in data.columns if c not in {label_column, "is_attack"}]
+    excluded_columns = {label_column, "is_attack"} | NON_FEATURE_COLUMNS
+    feature_columns = [c for c in data.columns if c not in excluded_columns]
     if not feature_columns:
         raise ValueError("移除標籤後沒有可用的特徵")
     if data["is_attack"].nunique() < 2:
