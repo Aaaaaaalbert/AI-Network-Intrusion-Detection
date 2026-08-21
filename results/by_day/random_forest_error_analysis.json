@@ -1,0 +1,42 @@
+{
+  "by_attack_type": {
+    "Bot": {
+      "missed": 1966,
+      "total": 1966,
+      "miss_rate_percent": 100.0,
+      "recall_percent": 0.0
+    },
+    "DDoS": {
+      "missed": 105227,
+      "total": 128027,
+      "miss_rate_percent": 82.19,
+      "recall_percent": 17.81
+    },
+    "PortScan": {
+      "missed": 158806,
+      "total": 158930,
+      "miss_rate_percent": 99.92,
+      "recall_percent": 0.08
+    }
+  },
+  "by_source_file": {
+    "Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv": {
+      "total_attacks": 128027,
+      "missed_attacks": 105227,
+      "miss_rate_percent": 82.19,
+      "recall_percent": 17.81
+    },
+    "Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv": {
+      "total_attacks": 158930,
+      "missed_attacks": 158806,
+      "miss_rate_percent": 99.92,
+      "recall_percent": 0.08
+    },
+    "Friday-WorkingHours-Morning.pcap_ISCX.csv": {
+      "total_attacks": 1966,
+      "missed_attacks": 1966,
+      "miss_rate_percent": 100.0,
+      "recall_percent": 0.0
+    }
+  }
+}

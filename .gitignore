@@ -18,9 +18,10 @@ dataset/raw/**/*.zip
 data/processed/
 dataset/processed/*
 !dataset/processed/.gitkeep
+dataset/processed_by_day/
 
 # Trained models
-models/*.joblib
+models/**/*.joblib
 
 # EDA outputs
 results/eda/*
