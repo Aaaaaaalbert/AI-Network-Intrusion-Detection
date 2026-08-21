@@ -26,6 +26,10 @@ class PrepareDataTests(unittest.TestCase):
             combined = load_csv_directory(raw)
 
             self.assertEqual(combined["value"].tolist(), [1, 2, 3])
+            self.assertEqual(
+                combined["source_file"].tolist(),
+                ["A.CSV", "b.csv", "nested/c.csv"],
+            )
 
     def test_load_csv_directory_rejects_empty_directory(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -70,6 +74,35 @@ class PrepareDataTests(unittest.TestCase):
             train = pd.read_csv(output / "train.csv")
             self.assertIn("is_attack", train.columns)
             self.assertFalse(train.isna().any().any())
+
+    def test_prepare_dataset_can_hold_out_files_by_prefix(self):
+        frame = pd.DataFrame({
+            "feature": [1, 2, 3, 4, 5, 6],
+            "Label": ["BENIGN", "DoS", "BENIGN", "DoS", "BENIGN", "PortScan"],
+            "source_file": [
+                "Monday.csv", "Monday.csv", "Tuesday.csv", "Tuesday.csv",
+                "Friday-Morning.csv", "Friday-Afternoon.csv",
+            ],
+        })
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            metadata = prepare_dataset(
+                frame,
+                output,
+                split_strategy="by-file",
+                test_file_prefix="Friday",
+            )
+            train = pd.read_csv(output / "train.csv")
+            test = pd.read_csv(output / "test.csv")
+
+            self.assertEqual(metadata["split_strategy"], "by-file")
+            self.assertNotIn("source_file", metadata["raw_feature_columns"])
+            self.assertFalse(any(
+                column.startswith("source_file")
+                for column in metadata["transformed_feature_columns"]
+            ))
+            self.assertFalse(train["source_file"].str.startswith("Friday").any())
+            self.assertTrue(test["source_file"].str.startswith("Friday").all())
 
 
 if __name__ == "__main__":

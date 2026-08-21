@@ -22,7 +22,13 @@ NORMAL_LABELS = {"0", "benign", "normal", "normal."}
 # Identifier/metadata columns that are unique (or near-unique) per row.
 # One-hot encoding them would explode into millions of useless columns and
 # they would not generalize to traffic never seen during training anyway.
-NON_FEATURE_COLUMNS = {"flow_id", "source_ip", "destination_ip", "timestamp"}
+NON_FEATURE_COLUMNS = {
+    "flow_id",
+    "source_ip",
+    "destination_ip",
+    "timestamp",
+    "source_file",
+}
 
 
 def read_csv_file(path: Path) -> pd.DataFrame:
@@ -34,7 +40,7 @@ def read_csv_file(path: Path) -> pd.DataFrame:
 
 
 def load_csv_directory(input_dir: Path) -> pd.DataFrame:
-    """Recursively load and concatenate CSV files in a stable order."""
+    """Recursively load CSV files and retain each row's source filename."""
     if not input_dir.exists():
         raise FileNotFoundError(f"輸入資料夾不存在：{input_dir}")
     if not input_dir.is_dir():
@@ -47,7 +53,12 @@ def load_csv_directory(input_dir: Path) -> pd.DataFrame:
     if not csv_files:
         raise FileNotFoundError(f"輸入資料夾內找不到 CSV：{input_dir}")
 
-    return pd.concat([read_csv_file(path) for path in csv_files], ignore_index=True)
+    frames = []
+    for path in csv_files:
+        frame = read_csv_file(path)
+        frame["source_file"] = path.relative_to(input_dir).as_posix()
+        frames.append(frame)
+    return pd.concat(frames, ignore_index=True)
 
 
 def clean_data(frame: pd.DataFrame, label_column: str = "label") -> pd.DataFrame:
@@ -58,7 +69,10 @@ def clean_data(frame: pd.DataFrame, label_column: str = "label") -> pd.DataFrame
     if label_column not in data.columns:
         raise ValueError(f"找不到標籤欄位：{label_column}")
 
-    data = data.drop_duplicates().reset_index(drop=True)
+    # Provenance is not part of a flow. Ignoring it here prevents an identical
+    # row in two files from leaking across a file-based train/test boundary.
+    duplicate_subset = [column for column in data.columns if column != "source_file"]
+    data = data.drop_duplicates(subset=duplicate_subset).reset_index(drop=True)
     data = data.replace([np.inf, -np.inf], np.nan)
     data = data.dropna(subset=[label_column])
     labels = data[label_column].astype(str).str.strip()
@@ -107,6 +121,8 @@ def prepare_dataset(
     label_column: str = "label",
     test_size: float = 0.2,
     random_state: int = 42,
+    split_strategy: str = "random",
+    test_file_prefix: str = "Friday",
 ) -> dict[str, object]:
     """Clean, split and transform data, then persist reproducible artifacts."""
     data = clean_data(frame, label_column)
@@ -118,12 +134,29 @@ def prepare_dataset(
     if data["is_attack"].nunique() < 2:
         raise ValueError("資料必須同時包含正常與攻擊流量")
 
-    train, test = train_test_split(
-        data,
-        test_size=test_size,
-        random_state=random_state,
-        stratify=data["is_attack"],
-    )
+    if split_strategy == "random":
+        train, test = train_test_split(
+            data,
+            test_size=test_size,
+            random_state=random_state,
+            stratify=data["is_attack"],
+        )
+    elif split_strategy == "by-file":
+        if "source_file" not in data.columns:
+            raise ValueError("依檔案切分需要 source_file；請使用 --input-dir 載入資料")
+        test_mask = data["source_file"].str.casefold().str.startswith(
+            test_file_prefix.casefold()
+        )
+        train = data.loc[~test_mask]
+        test = data.loc[test_mask]
+        if train.empty or test.empty:
+            raise ValueError(
+                f"依檔案切分失敗：前綴 {test_file_prefix!r} 必須同時留下訓練與測試資料"
+            )
+        if train["is_attack"].nunique() < 2 or test["is_attack"].nunique() < 2:
+            raise ValueError("依檔案切分後，訓練集與測試集都必須包含正常及攻擊流量")
+    else:
+        raise ValueError(f"不支援的切分策略：{split_strategy}")
     preprocessor = build_preprocessor(train[feature_columns])
     train_values = preprocessor.fit_transform(train[feature_columns])
     test_values = preprocessor.transform(test[feature_columns])
@@ -133,6 +166,11 @@ def prepare_dataset(
     train_output[[label_column, "is_attack"]] = train[[label_column, "is_attack"]].reset_index(drop=True)
     test_output = pd.DataFrame(test_values, columns=transformed_columns)
     test_output[[label_column, "is_attack"]] = test[[label_column, "is_attack"]].reset_index(drop=True)
+
+    # Retain provenance for audit/error analysis, but never use it as a feature.
+    if "source_file" in data.columns:
+        train_output["source_file"] = train["source_file"].reset_index(drop=True)
+        test_output["source_file"] = test["source_file"].reset_index(drop=True)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     train_output.to_csv(output_dir / "train.csv", index=False)
@@ -150,6 +188,12 @@ def prepare_dataset(
             str(key): int(value) for key, value in data[label_column].value_counts().items()
         },
         "random_state": random_state,
+        "split_strategy": split_strategy,
+        "test_file_prefix": test_file_prefix if split_strategy == "by-file" else None,
+        "train_source_files": sorted(train["source_file"].unique().tolist())
+        if "source_file" in train.columns else [],
+        "test_source_files": sorted(test["source_file"].unique().tolist())
+        if "source_file" in test.columns else [],
     }
     (output_dir / "metadata.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -181,6 +225,17 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--label-column", default="label")
     parser.add_argument("--test-size", type=float, default=0.2)
+    parser.add_argument(
+        "--split-strategy",
+        choices=("random", "by-file"),
+        default="random",
+        help="random=隨機分層切分；by-file=依來源檔案前綴切分",
+    )
+    parser.add_argument(
+        "--test-file-prefix",
+        default="Friday",
+        help="by-file 模式中保留為測試集的檔名前綴",
+    )
     return parser
 
 
@@ -193,7 +248,14 @@ def main() -> None:
         frame = load_csv_directory(args.input_dir)
     else:
         frame = read_csv_file(args.input)
-    metadata = prepare_dataset(frame, args.output_dir, args.label_column, args.test_size)
+    metadata = prepare_dataset(
+        frame,
+        args.output_dir,
+        args.label_column,
+        args.test_size,
+        split_strategy=args.split_strategy,
+        test_file_prefix=args.test_file_prefix,
+    )
     print(f"完成：{metadata['train_rows']} 筆訓練資料、{metadata['test_rows']} 筆測試資料")
     print(f"輸出位置：{args.output_dir.resolve()}")
 

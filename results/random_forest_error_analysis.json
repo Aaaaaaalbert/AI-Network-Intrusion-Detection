@@ -1,0 +1,65 @@
+{
+  "false_negatives_by_attack_type": {
+    "DoS Hulk": {
+      "missed": 89,
+      "total": 46067,
+      "miss_rate_percent": 0.19
+    },
+    "Bot": {
+      "missed": 27,
+      "total": 392,
+      "miss_rate_percent": 6.89
+    },
+    "DDoS": {
+      "missed": 12,
+      "total": 25732,
+      "miss_rate_percent": 0.05
+    },
+    "DoS GoldenEye": {
+      "missed": 6,
+      "total": 2088,
+      "miss_rate_percent": 0.29
+    },
+    "PortScan": {
+      "missed": 4,
+      "total": 31789,
+      "miss_rate_percent": 0.01
+    },
+    "SSH-Patator": {
+      "missed": 4,
+      "total": 1191,
+      "miss_rate_percent": 0.34
+    },
+    "Web Attack  XSS": {
+      "missed": 3,
+      "total": 120,
+      "miss_rate_percent": 2.5
+    },
+    "Web Attack  Brute Force": {
+      "missed": 2,
+      "total": 308,
+      "miss_rate_percent": 0.65
+    },
+    "Web Attack  Sql Injection": {
+      "missed": 2,
+      "total": 4,
+      "miss_rate_percent": 50.0
+    },
+    "DoS Slowhttptest": {
+      "missed": 2,
+      "total": 1081,
+      "miss_rate_percent": 0.19
+    },
+    "DoS slowloris": {
+      "missed": 2,
+      "total": 1146,
+      "miss_rate_percent": 0.17
+    },
+    "FTP-Patator": {
+      "missed": 1,
+      "total": 1598,
+      "miss_rate_percent": 0.06
+    }
+  },
+  "false_positives_total": 86
+}

@@ -1,0 +1,21 @@
+{
+  "features_dropped": [
+    "destination_port",
+    "source_port",
+    "init_win_bytes_forward",
+    "init_win_bytes_backward"
+  ],
+  "accuracy": 0.9878450754979615,
+  "precision": 0.9511000758673012,
+  "recall": 0.9891597701046365,
+  "confusion_matrix": [
+    [
+      448907,
+      5672
+    ],
+    [
+      1209,
+      110320
+    ]
+  ]
+}
