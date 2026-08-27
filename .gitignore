@@ -19,6 +19,7 @@ data/processed/
 dataset/processed/*
 !dataset/processed/.gitkeep
 dataset/processed_by_day/
+dataset/processed_multiclass_temporal/
 
 # Trained models
 models/**/*.joblib
