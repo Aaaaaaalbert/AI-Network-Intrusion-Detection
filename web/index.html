@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>AI 網路入侵偵測系統 — 監控面板</title>
+<style>
+  :root {
+    --bg: #0f1420; --panel: #161d2e; --border: #2a3450;
+    --text: #e7ecf7; --muted: #8b96b3;
+    --benign: #3ecf8e; --attack: #ff5c72; --accent: #5b8cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+    background: var(--bg); color: var(--text); padding: 24px;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .subtitle { color: var(--muted); margin: 0 0 20px; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: start; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px;
+  }
+  .panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 12px; }
+  .stat-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .stat-row:last-child { border-bottom: none; }
+  select, button {
+    width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+    background: #0d1220; color: var(--text); font-size: 14px; margin-bottom: 10px;
+  }
+  button {
+    background: var(--accent); border: none; cursor: pointer; font-weight: 600;
+  }
+  button:hover { filter: brightness(1.1); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .result { display: none; }
+  .result.show { display: block; }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 999px; font-weight: 700;
+    font-size: 13px; margin-bottom: 12px;
+  }
+  .badge.benign { background: rgba(62,207,142,.15); color: var(--benign); }
+  .badge.attack { background: rgba(255,92,114,.15); color: var(--attack); }
+  .conf-bar-bg { background: #0d1220; border-radius: 6px; height: 10px; overflow: hidden; margin: 6px 0 4px; }
+  .conf-bar { height: 100%; border-radius: 6px; transition: width .3s; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; }
+  tr:last-child td { border-bottom: none; }
+  .empty-row td { color: var(--muted); text-align: center; padding: 24px; }
+  .true-label { color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>AI 網路入侵偵測系統</h1>
+  <p class="subtitle">Random Forest 多類別分類模型 — 從真實 CIC-IDS2017 測試資料中挑選範例流量進行預測</p>
+
+  <div class="grid">
+    <div>
+      <div class="panel" style="margin-bottom:16px;">
+        <h2>模型資訊</h2>
+        <div id="model-info">
+          <div class="stat-row"><span>載入中…</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>選擇範例流量</h2>
+        <select id="sample-select"></select>
+        <button id="predict-btn">執行預測</button>
+
+        <div id="result" class="result">
+          <div id="badge" class="badge"></div>
+          <div style="font-size:13px; color:var(--muted);">信心分數</div>
+          <div class="conf-bar-bg"><div id="conf-bar" class="conf-bar"></div></div>
+          <div id="conf-text" style="font-size:20px; font-weight:700;"></div>
+          <div id="true-label" class="true-label" style="margin-top:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>近期預測紀錄（監控）</h2>
+      <table>
+        <thead>
+          <tr><th>時間</th><th>真實標籤</th><th>模型預測</th><th>是否攻擊</th><th>信心分數</th><th>是否正確</th></tr>
+        </thead>
+        <tbody id="log-body">
+          <tr class="empty-row"><td colspan="6">還沒有預測紀錄，左邊選一筆範例流量開始</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<script>
+const API_BASE = "";
+let samples = [];
+const log = [];
+
+async function loadModelInfo() {
+  const res = await fetch(`${API_BASE}/model-info`);
+  const info = await res.json();
+  document.getElementById("model-info").innerHTML = `
+    <div class="stat-row"><span>Accuracy</span><span>${(info.accuracy * 100).toFixed(2)}%</span></div>
+    <div class="stat-row"><span>Macro Precision</span><span>${(info.macro_precision * 100).toFixed(2)}%</span></div>
+    <div class="stat-row"><span>Macro Recall</span><span>${(info.macro_recall * 100).toFixed(2)}%</span></div>
+    <div class="stat-row"><span>Macro F1</span><span>${(info.macro_f1 * 100).toFixed(2)}%</span></div>
+    <div class="stat-row"><span>攻擊類別數</span><span>${info.classes.length}</span></div>
+  `;
+}
+
+async function loadSamples() {
+  const res = await fetch(`${API_BASE}/samples`);
+  samples = await res.json();
+  const select = document.getElementById("sample-select");
+  select.innerHTML = samples.map((s, i) => `<option value="${i}">${s.label}</option>`).join("");
+}
+
+function renderResult(prediction, trueLabel) {
+  const result = document.getElementById("result");
+  const badge = document.getElementById("badge");
+  const confBar = document.getElementById("conf-bar");
+  const confText = document.getElementById("conf-text");
+  const trueLabelEl = document.getElementById("true-label");
+
+  result.classList.add("show");
+  badge.textContent = prediction.is_attack ? `攻擊：${prediction.attack_type}` : "正常流量（BENIGN）";
+  badge.className = "badge " + (prediction.is_attack ? "attack" : "benign");
+
+  const pct = (prediction.confidence * 100).toFixed(2);
+  confBar.style.width = pct + "%";
+  confBar.style.background = prediction.is_attack ? "var(--attack)" : "var(--benign)";
+  confText.textContent = pct + "%";
+
+  const correct = prediction.attack_type === trueLabel;
+  trueLabelEl.textContent = `真實標籤：${trueLabel}（${correct ? "預測正確" : "預測錯誤"}）`;
+  trueLabelEl.style.color = correct ? "var(--benign)" : "var(--attack)";
+  return correct;
+}
+
+function prependLog(entry) {
+  log.unshift(entry);
+  const tbody = document.getElementById("log-body");
+  tbody.innerHTML = log.slice(0, 20).map(e => `
+    <tr>
+      <td>${e.time}</td>
+      <td>${e.trueLabel}</td>
+      <td>${e.attackType}</td>
+      <td style="color:${e.isAttack ? 'var(--attack)' : 'var(--benign)'}">${e.isAttack ? "是" : "否"}</td>
+      <td>${(e.confidence * 100).toFixed(2)}%</td>
+      <td style="color:${e.correct ? 'var(--benign)' : 'var(--attack)'}">${e.correct ? "✓" : "✗"}</td>
+    </tr>
+  `).join("");
+}
+
+async function runPrediction() {
+  const btn = document.getElementById("predict-btn");
+  const idx = document.getElementById("sample-select").value;
+  const sample = samples[idx];
+  btn.disabled = true;
+  btn.textContent = "預測中…";
+  try {
+    const res = await fetch(`${API_BASE}/predict`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(sample.features),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      alert("預測失敗：" + JSON.stringify(err.detail));
+      return;
+    }
+    const prediction = await res.json();
+    const correct = renderResult(prediction, sample.label);
+    prependLog({
+      time: new Date().toLocaleTimeString("zh-TW"),
+      trueLabel: sample.label,
+      attackType: prediction.attack_type,
+      isAttack: prediction.is_attack,
+      confidence: prediction.confidence,
+      correct,
+    });
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "執行預測";
+  }
+}
+
+document.getElementById("predict-btn").addEventListener("click", runPrediction);
+loadModelInfo();
+loadSamples();
+</script>
+</body>
+</html>

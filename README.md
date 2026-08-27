@@ -6,7 +6,8 @@
 
 - Milestone 1（2026-08-11）：資料集探索分析（EDA）
 - Milestone 2（2026-08-14 ～ 08-17）：支援多 CSV 合併、處理真實 CIC-IDS2017 編碼問題、建立基準模型、按日期切分驗證
-- 進行中：多類別攻擊分類模型
+- Milestone 3（2026-08-26 ～ 08-27）：多類別攻擊分類模型、預測信心分數、正式校準分析（ECE / Brier / Log Loss）
+- 進行中：預測 API（`api/`）與監控網頁（`web/`）
 
 完整的逐日紀錄（含每一步在解決什麼問題、學到什麼）見 [`docs/progress_log.md`](docs/progress_log.md)。
 
@@ -43,6 +44,24 @@ python -m src.train_baseline --processed-dir dataset/processed_by_day --model ra
 - `test.csv`：保留的測試資料
 - `preprocessor.joblib`：只用訓練集擬合的資料轉換器
 - `metadata.json`：欄位、資料筆數與標籤分布
+
+## 預測 API 與監控網頁
+
+需要先產生真實資料的多類別模型（`models/multiclass_random/random_forest.joblib`）與前處理器（`dataset/processed/preprocessor.joblib`）——這兩個檔案是從真實 CIC-IDS2017 資料衍生出來的，體積較大，不納入版本控制，需要照上面「快速開始」的步驟自己跑一次 `prepare_data` + `train_baseline --target label` 產生。
+
+```powershell
+python -m pip install -r requirements.txt
+python -m uvicorn api.main:app --reload
+```
+
+啟動後開啟 http://127.0.0.1:8000 即可看到監控網頁（`web/index.html`，由 API 直接掛載提供）；API 本身另外提供：
+
+- `GET /health`：健康檢查
+- `GET /model-info`：目前使用的模型與整體指標（accuracy、macro precision/recall/f1）
+- `GET /samples`：15 種攻擊類型（含 BENIGN）各一筆的真實測試資料，供網頁下拉選單使用
+- `POST /predict`：輸入一筆流量的 80 個特徵值（JSON），回傳 `is_attack`、`attack_type`、`confidence`
+
+網頁選一筆真實流量送出預測後，右側「近期預測紀錄」會累積顯示每次預測的結果與是否正確——刻意保留了模型本來就會答錯的範例（例如某筆 `DoS GoldenEye` 流量會被誤判成 `BENIGN`），用來如實呈現模型現況，而不是只挑會答對的範例。
 
 ## 專案結構
 
