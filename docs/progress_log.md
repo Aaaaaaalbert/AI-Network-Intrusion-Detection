@@ -125,15 +125,16 @@
 **問題**：模型只存在 `.joblib` 檔案裡，沒有一個實際可以輸入一筆流量、拿到「是否攻擊／攻擊類型／信心分數」的介面；也還沒有可以觀察模型實際預測情況的畫面。（推甄簡報不做，Day 7 略過。）
 
 **做了什麼**：
-- `api/main.py`（FastAPI）：載入 `models/multiclass_random/random_forest.joblib` 與對應的 `preprocessor.joblib`（多類別模型本身就同時回答「是否攻擊」與「攻擊類型」兩個目標，不需要另外接二元模型）。提供 `/health`、`/model-info`、`/samples`（15 種類別各一筆的真實測試資料）、`/predict`（輸入 80 個特徵值，回傳 `is_attack`／`attack_type`／`confidence`；欄位對不上時回傳清楚的錯誤訊息，列出缺什麼、多什麼，而不是讓 sklearn 丟出難懂的例外）。
-- `web/index.html`：純 HTML/CSS/JS 監控頁面（不需額外前端框架），左側顯示模型整體指標、可選一筆真實範例流量送出預測；右側是「近期預測紀錄」表格，每次預測都會累積顯示，包含是否猜對。API 直接掛載這個靜態頁面，單一伺服器就能跑完整個展示。
-- `tests/test_api.py`：3 個測試（健康檢查、真實流量預測回傳合理格式、非法輸入回傳 422 與清楚錯誤內容）。因為模型與前處理器檔案是從真實資料衍生、體積大、不進版控，測試會在檔案不存在時自動 `skip`，不會讓沒有先跑過完整流程的環境測試失敗。
+- `api/main.py`（FastAPI）：載入多類別 Random Forest 與對應前處理器，提供健康檢查、模型／嚴格驗證／校準摘要、平衡重播樣本，以及回傳前三名候選類別與信心的預測端點。
+- `web/index.html`：重構為「CIC-IDS2017 威脅流量重播實驗室」。支援開始、暫停、單步、速度與攻擊類型篩選；即時更新實際攻擊率 vs 模型偵測率、攻擊分布、事件列表、流量特徵、前三名候選與人工複查佇列。畫面清楚標示為離線評估模式，不假裝是真實即時網路。
+- `src/build_demo_samples.py`：從處理後測試集挑選 97 筆各類別正確／錯誤案例，再逆轉標準化回到原始尺度，供 API 正確走完整前處理流程。
+- `tests/test_api.py`：新增模型驗證資訊測試，並直接比對「API 預測」與「前處理器＋模型直接預測」，避免重複前處理再次發生。
 
-**過程中抓到的問題**：範例資料裡的 `Web Attack` 系列標籤含有一個原始 cp1252 破折號位元組（`\x96`），一開始用 Unicode 替代字元「�」去清理沒有效果（兩者是不同的東西），改成直接比對 `"\x96"` 才修正顯示。另外 `preprocessor.transform()` 回傳的是不帶欄名的 numpy 陣列，直接餵給模型會觸發 sklearn 的欄位名稱警告，改成轉回帶欄名的 DataFrame 再預測。
+**過程中抓到的問題**：第一版 `sample_flows.csv` 直接取自已標準化的 `processed/test.csv`，API 卻又呼叫一次 `preprocessor.transform()`，造成樣本被重複標準化。舊版展示的 `DoS GoldenEye → BENIGN（93%）` 因此不能當作模型既有錯誤。新版將樣本逆轉回原始尺度，並用自動測試鎖定 API 與模型直接預測必須一致。
 
-**驗證**：用瀏覽器實際跑過網頁——選一筆 `BENIGN` 預測正確（信心 97%）；選一筆 `DoS GoldenEye` 被模型誤判成 `BENIGN`（信心 93%，這是模型本身的既有誤判，不是程式錯誤，也刻意保留讓網頁如實呈現）。16/16 測試通過（含新增的 API 測試）。
+**驗證**：桌面版已完成瀏覽器操作驗證；Bot 攻擊被判為 BENIGN 時會以紅色 `Critical 漏報` 顯示，而非用綠色正常狀態掩蓋。重播、暫停、單步、篩選與事件詳情均可操作，17/17 測試通過。
 
-**相關檔案**：`api/main.py`、`api/sample_flows.csv`、`web/index.html`、`tests/test_api.py`、`.claude/launch.json`（本機預覽設定）、`README.md`（新增執行說明）
+**相關檔案**：`api/main.py`、`api/sample_flows.csv`、`src/build_demo_samples.py`、`web/index.html`、`tests/test_api.py`、`README.md`
 
 **下一步**：三個原始目標＋校準檢驗＋API＋監控網頁都已完成並驗證過。推甄簡報依使用者決定不做；如果之後還要收尾，可以考慮把目前逐日紀錄整理成一份對外的成果總結文件。
 
