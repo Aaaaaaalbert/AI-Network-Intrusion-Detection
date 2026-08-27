@@ -1,0 +1,145 @@
+{
+  "model_path": "models\\by_day\\random_forest.joblib",
+  "target": "is_attack",
+  "test_rows": 703240,
+  "accuracy": 0.6216369944826802,
+  "expected_calibration_error": 0.32966004493487355,
+  "log_loss": 6.686181770314145,
+  "reliability_bins": [
+    {
+      "bin_range": [
+        0.0,
+        0.1
+      ],
+      "count": 0,
+      "avg_confidence": null,
+      "accuracy": null
+    },
+    {
+      "bin_range": [
+        0.1,
+        0.2
+      ],
+      "count": 0,
+      "avg_confidence": null,
+      "accuracy": null
+    },
+    {
+      "bin_range": [
+        0.2,
+        0.3
+      ],
+      "count": 0,
+      "avg_confidence": null,
+      "accuracy": null
+    },
+    {
+      "bin_range": [
+        0.3,
+        0.4
+      ],
+      "count": 0,
+      "avg_confidence": null,
+      "accuracy": null
+    },
+    {
+      "bin_range": [
+        0.4,
+        0.5
+      ],
+      "count": 97,
+      "avg_confidence": 0.5,
+      "accuracy": 0.0309
+    },
+    {
+      "bin_range": [
+        0.5,
+        0.6
+      ],
+      "count": 44785,
+      "avg_confidence": 0.5745,
+      "accuracy": 0.0774
+    },
+    {
+      "bin_range": [
+        0.6,
+        0.7
+      ],
+      "count": 36483,
+      "avg_confidence": 0.6451,
+      "accuracy": 0.5304
+    },
+    {
+      "bin_range": [
+        0.7,
+        0.8
+      ],
+      "count": 916,
+      "avg_confidence": 0.7404,
+      "accuracy": 0.4301
+    },
+    {
+      "bin_range": [
+        0.8,
+        0.9
+      ],
+      "count": 2105,
+      "avg_confidence": 0.8752,
+      "accuracy": 0.2105
+    },
+    {
+      "bin_range": [
+        0.9,
+        1.0
+      ],
+      "count": 618854,
+      "avg_confidence": 0.9973,
+      "accuracy": 0.6682
+    }
+  ],
+  "confidence_threshold_table": [
+    {
+      "threshold": 0.5,
+      "coverage_percent": 100.0,
+      "covered_count": 703240,
+      "accuracy_within_covered": 0.6216
+    },
+    {
+      "threshold": 0.6,
+      "coverage_percent": 94.56,
+      "covered_count": 664997,
+      "accuracy_within_covered": 0.6528
+    },
+    {
+      "threshold": 0.7,
+      "coverage_percent": 88.74,
+      "covered_count": 624030,
+      "accuracy_within_covered": 0.6673
+    },
+    {
+      "threshold": 0.8,
+      "coverage_percent": 88.31,
+      "covered_count": 621018,
+      "accuracy_within_covered": 0.6666
+    },
+    {
+      "threshold": 0.9,
+      "coverage_percent": 88.07,
+      "covered_count": 619344,
+      "accuracy_within_covered": 0.6678
+    },
+    {
+      "threshold": 0.95,
+      "coverage_percent": 87.57,
+      "covered_count": 615798,
+      "accuracy_within_covered": 0.6687
+    },
+    {
+      "threshold": 0.99,
+      "coverage_percent": 84.18,
+      "covered_count": 591959,
+      "accuracy_within_covered": 0.6768
+    }
+  ],
+  "brier_score": 0.3241352970536374
+}

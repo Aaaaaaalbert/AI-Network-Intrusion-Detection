@@ -115,6 +115,48 @@ def build_preprocessor(features: pd.DataFrame) -> ColumnTransformer:
     return ColumnTransformer(transformers, verbose_feature_names_out=False)
 
 
+def split_temporal_per_class(
+    data: pd.DataFrame, label_column: str, test_size: float
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Split each label's own rows chronologically (early -> train, late -> test).
+
+    Splitting whole days (by-file) leaves multi-class labels that only occur
+    on one day (e.g. Heartbleed) with zero training or zero test examples.
+    Splitting within each label's own timeline keeps every label in both
+    sets while still holding out its most recent traffic.
+    """
+    if "timestamp" not in data.columns:
+        raise ValueError("依類別時間切分需要 timestamp 欄位")
+
+    # format="mixed": CIC-IDS2017 mixes "D/M/YYYY H:MM" (no seconds) with
+    # "DD/MM/YYYY HH:MM:SS" across files; a single inferred format silently
+    # turns the other variant into NaT.
+    parsed_time = pd.to_datetime(
+        data["timestamp"], dayfirst=True, format="mixed", errors="coerce"
+    )
+    if parsed_time.isna().any():
+        raise ValueError("timestamp 欄位有無法解析的值，無法依時間切分")
+
+    train_parts, test_parts = [], []
+    for _, group in data.groupby(label_column):
+        ordered_index = parsed_time.loc[group.index].sort_values(kind="stable").index
+        ordered_group = group.loc[ordered_index]
+
+        n = len(ordered_group)
+        if n < 2:
+            # Too few rows to hold any out; keep them for training only.
+            train_parts.append(ordered_group)
+            continue
+
+        split_idx = min(n - 1, max(1, round(n * (1 - test_size))))
+        train_parts.append(ordered_group.iloc[:split_idx])
+        test_parts.append(ordered_group.iloc[split_idx:])
+
+    train = pd.concat(train_parts).sort_index()
+    test = pd.concat(test_parts).sort_index() if test_parts else data.iloc[0:0]
+    return train, test
+
+
 def prepare_dataset(
     frame: pd.DataFrame,
     output_dir: Path,
@@ -155,6 +197,12 @@ def prepare_dataset(
             )
         if train["is_attack"].nunique() < 2 or test["is_attack"].nunique() < 2:
             raise ValueError("依檔案切分後，訓練集與測試集都必須包含正常及攻擊流量")
+    elif split_strategy == "temporal-per-class":
+        train, test = split_temporal_per_class(data, label_column, test_size)
+        if train.empty or test.empty:
+            raise ValueError("依類別時間切分失敗：訓練集或測試集為空")
+        if train["is_attack"].nunique() < 2 or test["is_attack"].nunique() < 2:
+            raise ValueError("依類別時間切分後，訓練集與測試集都必須包含正常及攻擊流量")
     else:
         raise ValueError(f"不支援的切分策略：{split_strategy}")
     preprocessor = build_preprocessor(train[feature_columns])
@@ -227,9 +275,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--test-size", type=float, default=0.2)
     parser.add_argument(
         "--split-strategy",
-        choices=("random", "by-file"),
+        choices=("random", "by-file", "temporal-per-class"),
         default="random",
-        help="random=隨機分層切分；by-file=依來源檔案前綴切分",
+        help="random=隨機分層切分；by-file=依來源檔案前綴切分；"
+        "temporal-per-class=每個類別各自依時間切分",
     )
     parser.add_argument(
         "--test-file-prefix",

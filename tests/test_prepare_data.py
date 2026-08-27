@@ -104,6 +104,49 @@ class PrepareDataTests(unittest.TestCase):
             self.assertFalse(train["source_file"].str.startswith("Friday").any())
             self.assertTrue(test["source_file"].str.startswith("Friday").all())
 
+    def test_prepare_dataset_splits_each_label_by_its_own_timeline(self):
+        frame = pd.DataFrame({
+            "feature": range(11),
+            "Label": ["BENIGN"] * 5 + ["DoS Hulk"] * 5 + ["Heartbleed"],
+            "Timestamp": [
+                "3/7/2017 8:00", "3/7/2017 8:01", "3/7/2017 8:02",
+                "3/7/2017 8:03", "3/7/2017 8:04",
+                "5/7/2017 9:00", "5/7/2017 9:01", "5/7/2017 9:02",
+                "5/7/2017 9:03", "5/7/2017 9:04",
+                "5/7/2017 3:12",
+            ],
+        })
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            metadata = prepare_dataset(
+                frame, output, split_strategy="temporal-per-class", test_size=0.2,
+            )
+            train = pd.read_csv(output / "train.csv")
+            test = pd.read_csv(output / "test.csv")
+
+            self.assertEqual(metadata["split_strategy"], "temporal-per-class")
+            self.assertNotIn("timestamp", metadata["raw_feature_columns"])
+
+            # a single-row label can't be held out; it must stay in train only
+            self.assertIn("Heartbleed", train["label"].tolist())
+            self.assertNotIn("Heartbleed", test["label"].tolist())
+
+            # labels with enough rows appear on both sides
+            for label in ("BENIGN", "DoS Hulk"):
+                self.assertIn(label, train["label"].tolist())
+                self.assertIn(label, test["label"].tolist())
+
+            self.assertEqual(metadata["train_rows"], 9)
+            self.assertEqual(metadata["test_rows"], 2)
+
+    def test_temporal_split_requires_timestamp_column(self):
+        frame = pd.DataFrame({"feature": [1, 2], "Label": ["BENIGN", "DoS"]})
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "timestamp"):
+                prepare_dataset(
+                    frame, Path(directory), split_strategy="temporal-per-class"
+                )
+
 
 if __name__ == "__main__":
     unittest.main()
