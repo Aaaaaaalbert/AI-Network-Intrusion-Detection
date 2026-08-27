@@ -7,7 +7,7 @@
 - Milestone 1（2026-08-11）：資料集探索分析（EDA）
 - Milestone 2（2026-08-14 ～ 08-17）：支援多 CSV 合併、處理真實 CIC-IDS2017 編碼問題、建立基準模型、按日期切分驗證
 - Milestone 3（2026-08-26 ～ 08-27）：多類別攻擊分類模型、預測信心分數、正式校準分析（ECE / Brier / Log Loss）
-- 進行中：預測 API（`api/`）與監控網頁（`web/`）
+- Milestone 4（2026-08-27）：預測 API、真實流量重播與模型監控介面
 
 完整的逐日紀錄（含每一步在解決什麼問題、學到什麼）見 [`docs/progress_log.md`](docs/progress_log.md)。
 
@@ -57,11 +57,17 @@ python -m uvicorn api.main:app --reload
 啟動後開啟 http://127.0.0.1:8000 即可看到監控網頁（`web/index.html`，由 API 直接掛載提供）；API 本身另外提供：
 
 - `GET /health`：健康檢查
-- `GET /model-info`：目前使用的模型與整體指標（accuracy、macro precision/recall/f1）
-- `GET /samples`：15 種攻擊類型（含 BENIGN）各一筆的真實測試資料，供網頁下拉選單使用
-- `POST /predict`：輸入一筆流量的 80 個特徵值（JSON），回傳 `is_attack`、`attack_type`、`confidence`
+- `GET /model-info`：模型、隨機／時間／跨日期驗證與校準摘要
+- `GET /samples`：97 筆平衡的真實測試流量，包含各類別的正確與錯誤案例
+- `POST /predict`：輸入一筆原始尺度流量的 80 個特徵值，回傳攻擊類型、信心與前三名候選
 
-網頁選一筆真實流量送出預測後，右側「近期預測紀錄」會累積顯示每次預測的結果與是否正確——刻意保留了模型本來就會答錯的範例（例如某筆 `DoS GoldenEye` 流量會被誤判成 `BENIGN`），用來如實呈現模型現況，而不是只挑會答對的範例。
+網頁定位為「CIC-IDS2017 威脅流量重播實驗室」，不是正式即時監控。可依場景重播、暫停或逐筆分析真實標記流量，並同步更新攻擊趨勢、偵測分布、事件紀錄與高風險漏報。資料集 Ground Truth 只在評估模式中顯示。
+
+如需重建網頁的平衡重播樣本：
+
+```powershell
+python -m src.build_demo_samples
+```
 
 ## 專案結構
 

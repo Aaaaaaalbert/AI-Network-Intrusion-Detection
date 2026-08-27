@@ -2,193 +2,222 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<title>AI 網路入侵偵測系統 — 監控面板</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="使用 CIC-IDS2017 真實標記流量，重播並檢查 AI 網路入侵偵測模型的預測、信心與漏報。">
+<title>Sentinel AI｜威脅流量重播實驗室</title>
 <style>
   :root {
-    --bg: #0f1420; --panel: #161d2e; --border: #2a3450;
-    --text: #e7ecf7; --muted: #8b96b3;
-    --benign: #3ecf8e; --attack: #ff5c72; --accent: #5b8cff;
+    color-scheme: dark;
+    --bg: #071017; --bg-grid: rgba(64, 211, 191, .025);
+    --panel: #0c1822; --panel-2: #101f2b; --border: #1b3442; --border-soft: #142a36;
+    --text: #ecf7f8; --muted: #8298a5; --faint: #526a77;
+    --cyan: #3dd9c4; --blue: #63a8ff; --green: #43d590; --amber: #ffb84d; --red: #ff6170;
+    --red-soft: rgba(255, 97, 112, .12); --shadow: 0 18px 50px rgba(0, 0, 0, .18);
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0; font-family: -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
-    background: var(--bg); color: var(--text); padding: 24px;
+    margin: 0; min-width: 320px; min-height: 100vh;
+    font-family: Inter, ui-sans-serif, "Segoe UI", "Noto Sans TC", sans-serif; color: var(--text);
+    background-color: var(--bg);
+    background-image: linear-gradient(var(--bg-grid) 1px, transparent 1px), linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px), radial-gradient(circle at 18% -10%, rgba(61,217,196,.11), transparent 34%), radial-gradient(circle at 88% 0%, rgba(99,168,255,.08), transparent 28%);
+    background-size: 36px 36px, 36px 36px, auto, auto;
   }
-  h1 { font-size: 20px; margin: 0 0 4px; }
-  .subtitle { color: var(--muted); margin: 0 0 20px; font-size: 13px; }
-  .grid { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: start; }
-  .panel {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
-    padding: 16px;
-  }
-  .panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 12px; }
-  .stat-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--border); }
-  .stat-row:last-child { border-bottom: none; }
-  select, button {
-    width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
-    background: #0d1220; color: var(--text); font-size: 14px; margin-bottom: 10px;
-  }
-  button {
-    background: var(--accent); border: none; cursor: pointer; font-weight: 600;
-  }
-  button:hover { filter: brightness(1.1); }
-  button:disabled { opacity: .5; cursor: not-allowed; }
-  .result { display: none; }
-  .result.show { display: block; }
-  .badge {
-    display: inline-block; padding: 4px 12px; border-radius: 999px; font-weight: 700;
-    font-size: 13px; margin-bottom: 12px;
-  }
-  .badge.benign { background: rgba(62,207,142,.15); color: var(--benign); }
-  .badge.attack { background: rgba(255,92,114,.15); color: var(--attack); }
-  .conf-bar-bg { background: #0d1220; border-radius: 6px; height: 10px; overflow: hidden; margin: 6px 0 4px; }
-  .conf-bar { height: 100%; border-radius: 6px; transition: width .3s; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
-  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; }
-  tr:last-child td { border-bottom: none; }
-  .empty-row td { color: var(--muted); text-align: center; padding: 24px; }
-  .true-label { color: var(--muted); font-size: 12px; }
+  button, select { font: inherit; }
+  button:focus-visible, select:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .app-shell { width: min(1500px, calc(100% - 40px)); margin: 0 auto; padding: 24px 0 48px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 22px; }
+  .brand { display: flex; align-items: center; gap: 13px; }
+  .brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(61,217,196,.45); border-radius: 11px; background: linear-gradient(145deg,rgba(61,217,196,.18),rgba(99,168,255,.08)); color: var(--cyan); font-weight: 900; font-size: 12px; letter-spacing: -.04em; }
+  .brand-name { font-weight: 800; letter-spacing: -.02em; }
+  .brand-sub { color: var(--muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-top: 3px; }
+  .top-actions { display: flex; align-items: center; gap: 10px; }
+  .mode-pill, .api-status { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; border: 1px solid var(--border); background: rgba(12,24,34,.76); padding: 7px 12px; border-radius: 999px; color: #a9bdc8; font-size: 11px; }
+  .mode-pill { color: var(--amber); border-color: rgba(255,184,77,.25); }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+  .api-status.online .status-dot { background: var(--green); box-shadow: 0 0 0 5px rgba(67,213,144,.1); }
+  .api-status.offline .status-dot { background: var(--red); }
+  .hero { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin: 12px 0 22px; }
+  .eyebrow { color: var(--cyan); text-transform: uppercase; letter-spacing: .17em; font-size: 11px; font-weight: 800; margin-bottom: 9px; }
+  h1 { margin: 0; font-size: clamp(28px,3vw,44px); line-height: 1.05; letter-spacing: -.045em; }
+  .hero p { max-width: 760px; margin: 12px 0 0; color: var(--muted); line-height: 1.7; font-size: 13px; }
+  .session-state { min-width: 170px; text-align: right; }
+  .session-state span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 5px; }
+  .session-state strong { color: var(--cyan); font-size: 14px; }
+  .error-banner { display: none; margin-bottom: 14px; padding: 12px 14px; border: 1px solid rgba(255,97,112,.35); border-radius: 10px; background: var(--red-soft); color: #ffd7db; font-size: 12px; }
+  .error-banner.show { display: block; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; margin-bottom: 14px; }
+  .kpi { position: relative; overflow: hidden; min-height: 118px; padding: 17px 18px; border: 1px solid var(--border); border-radius: 13px; background: linear-gradient(145deg,rgba(16,31,43,.96),rgba(10,22,31,.96)); box-shadow: var(--shadow); }
+  .kpi::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; background: var(--cyan); opacity: .7; }
+  .kpi.warning::after { background: var(--red); } .kpi.review::after { background: var(--amber); }
+  .kpi-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  .kpi-value { margin: 12px 0 5px; font-size: 30px; font-weight: 850; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+  .kpi.warning .kpi-value { color: var(--red); } .kpi.review .kpi-value { color: var(--amber); }
+  .kpi-note { color: var(--faint); font-size: 11px; }
+  .dashboard { display: grid; grid-template-columns: minmax(0,1.75fr) minmax(320px,.75fr); gap: 14px; align-items: start; }
+  .stack { display: grid; gap: 14px; }
+  .panel { border: 1px solid var(--border); border-radius: 13px; background: rgba(12,24,34,.94); box-shadow: var(--shadow); overflow: hidden; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 18px; border-bottom: 1px solid var(--border-soft); }
+  .panel-title { margin: 0; font-size: 13px; letter-spacing: -.01em; }
+  .panel-kicker { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+  .panel-body { padding: 17px 18px; }
+  .legend { display: flex; gap: 15px; color: var(--muted); font-size: 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .chart-wrap { position: relative; height: 235px; }
+  #traffic-chart { width: 100%; height: 100%; display: block; }
+  .chart-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--faint); font-size: 12px; pointer-events: none; }
+  .chart-empty.hidden { display: none; }
+  .model-audit { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--border-soft); }
+  .audit-cell { padding: 13px 18px; border-right: 1px solid var(--border-soft); }
+  .audit-cell:last-child { border-right: 0; }
+  .audit-label { color: var(--muted); font-size: 10px; }
+  .audit-value { font-size: 17px; font-weight: 800; margin-top: 5px; }
+  .audit-value.bad { color: var(--red); }
+  .control-grid { display: grid; grid-template-columns: 1fr 112px; gap: 10px; }
+  label { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+  select { width: 100%; min-height: 40px; border: 1px solid var(--border); border-radius: 9px; background: #08131c; color: var(--text); padding: 0 11px; font-size: 12px; }
+  .button-row { display: grid; grid-template-columns: 1fr 92px 40px; gap: 8px; margin-top: 12px; }
+  .btn { min-height: 40px; border: 1px solid var(--border); border-radius: 9px; background: #102330; color: var(--text); cursor: pointer; font-size: 12px; font-weight: 750; transition: transform .15s ease,border-color .15s ease,filter .15s ease; }
+  .btn:hover { transform: translateY(-1px); border-color: #315366; }
+  .btn:disabled { opacity: .45; cursor: wait; transform: none; }
+  .btn.primary { color: #03110f; background: var(--cyan); border-color: var(--cyan); }
+  .btn.danger { color: white; background: var(--red); border-color: var(--red); }
+  .btn.icon { font-size: 16px; }
+  .replay-progress { margin-top: 13px; }
+  .progress-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 10px; margin-bottom: 6px; }
+  .progress-track { height: 5px; border-radius: 99px; background: #07121a; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg,var(--cyan),var(--blue)); transition: width .25s ease; }
+  .honesty-note { margin-top: 13px; padding: 11px 12px; background: rgba(255,184,77,.07); border: 1px solid rgba(255,184,77,.18); border-radius: 9px; color: #c6af83; font-size: 10px; line-height: 1.55; }
+  .event-empty { min-height: 190px; display: grid; place-items: center; text-align: center; color: var(--faint); font-size: 12px; line-height: 1.7; }
+  .event-view { display: none; } .event-view.show { display: block; }
+  .event-alert { display: none; padding: 11px 12px; border-radius: 9px; margin-bottom: 14px; font-size: 11px; font-weight: 750; }
+  .event-alert.show { display: block; }
+  .event-alert.critical { color: #ffd9dd; background: var(--red-soft); border: 1px solid rgba(255,97,112,.3); }
+  .event-alert.review { color: #ffe6bd; background: rgba(255,184,77,.09); border: 1px solid rgba(255,184,77,.22); }
+  .prediction-line { display: flex; justify-content: space-between; gap: 14px; align-items: start; margin-bottom: 14px; }
+  .prediction-label { font-size: 21px; font-weight: 850; letter-spacing: -.03em; word-break: break-word; }
+  .prediction-truth { color: var(--muted); font-size: 10px; margin-top: 5px; }
+  .confidence-ring { width: 62px; height: 62px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(var(--cyan) var(--confidence,0%),#132733 0); position: relative; }
+  .confidence-ring::after { content: ""; position: absolute; inset: 5px; background: var(--panel); border-radius: 50%; }
+  .confidence-ring span { z-index: 1; font-size: 11px; font-weight: 800; }
+  .flow-facts { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .fact { background: #09151e; border: 1px solid var(--border-soft); border-radius: 8px; padding: 9px 10px; }
+  .fact span { display: block; color: var(--faint); font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }
+  .fact strong { display: block; margin-top: 4px; font-size: 12px; font-weight: 700; }
+  .top-predictions { margin-top: 13px; display: grid; gap: 7px; }
+  .prob-row { display: grid; grid-template-columns: minmax(0,1fr) 70px 38px; align-items: center; gap: 8px; font-size: 10px; color: var(--muted); }
+  .prob-track { height: 4px; background: #07121a; border-radius: 99px; overflow: hidden; }
+  .prob-fill { height: 100%; background: var(--blue); border-radius: 99px; }
+  .distribution { display: grid; gap: 10px; }
+  .dist-row { display: grid; grid-template-columns: minmax(90px,1fr) 2fr 28px; gap: 9px; align-items: center; font-size: 10px; }
+  .dist-label { color: #b8c9d1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dist-track { height: 5px; border-radius: 99px; background: #07121a; overflow: hidden; }
+  .dist-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg,var(--red),var(--amber)); }
+  .dist-count { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+  .dist-empty { color: var(--faint); font-size: 11px; padding: 16px 0; text-align: center; }
+  .table-wrap { overflow: auto; max-height: 386px; }
+  table { width: 100%; min-width: 900px; border-collapse: collapse; font-size: 11px; }
+  th { position: sticky; top: 0; z-index: 1; color: var(--muted); background: #0d1b26; font-weight: 650; text-transform: uppercase; letter-spacing: .06em; font-size: 9px; }
+  th, td { padding: 11px 13px; text-align: left; border-bottom: 1px solid var(--border-soft); white-space: nowrap; }
+  tbody tr { cursor: pointer; transition: background .12s ease; }
+  tbody tr:hover { background: rgba(99,168,255,.04); }
+  tbody tr.false-negative { background: rgba(255,97,112,.055); }
+  .empty-row { cursor: default; } .empty-row td { height: 120px; color: var(--faint); text-align: center; }
+  .event-id { color: var(--muted); font-family: ui-monospace,SFMono-Regular,Consolas,monospace; }
+  .tag { display: inline-flex; align-items: center; padding: 4px 7px; border-radius: 99px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+  .tag.normal { color: var(--green); background: rgba(67,213,144,.1); }
+  .tag.attack { color: #ffabb3; background: rgba(255,97,112,.11); }
+  .tag.critical { color: #fff; background: var(--red); }
+  .tag.review { color: var(--amber); background: rgba(255,184,77,.1); }
+  .tag.correct { color: var(--green); background: rgba(67,213,144,.08); }
+  .tag.wrong { color: var(--red); background: rgba(255,97,112,.09); }
+  .footer { display: flex; justify-content: space-between; gap: 18px; margin-top: 16px; padding: 0 3px; color: var(--faint); font-size: 10px; line-height: 1.6; }
+  .footer strong { color: var(--muted); font-weight: 650; }
+  @media (max-width:1080px) { .dashboard { grid-template-columns: 1fr; } .side-stack { grid-template-columns: repeat(2,minmax(0,1fr)); } .side-stack .control-panel { grid-column: 1 / -1; } }
+  @media (max-width:760px) { .app-shell { width: min(100% - 24px,1500px); padding-top: 15px; } .topbar,.hero { align-items: flex-start; } .top-actions,.session-state { display:none; } h1 { font-size:30px; } .kpi-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .kpi { min-height:105px; } .side-stack { grid-template-columns:1fr; } .side-stack .control-panel { grid-column:auto; } .model-audit { grid-template-columns:1fr; } .audit-cell { border-right:0; border-bottom:1px solid var(--border-soft); } .audit-cell:last-child { border-bottom:0; } .footer { display:block; } }
+  @media (max-width:430px) { .kpi-grid { grid-template-columns:1fr; } .control-grid,.button-row { grid-template-columns:1fr; } .btn.icon { min-height:36px; } }
+  @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
 </style>
 </head>
 <body>
-  <h1>AI 網路入侵偵測系統</h1>
-  <p class="subtitle">Random Forest 多類別分類模型 — 從真實 CIC-IDS2017 測試資料中挑選範例流量進行預測</p>
-
-  <div class="grid">
-    <div>
-      <div class="panel" style="margin-bottom:16px;">
-        <h2>模型資訊</h2>
-        <div id="model-info">
-          <div class="stat-row"><span>載入中…</span></div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>選擇範例流量</h2>
-        <select id="sample-select"></select>
-        <button id="predict-btn">執行預測</button>
-
-        <div id="result" class="result">
-          <div id="badge" class="badge"></div>
-          <div style="font-size:13px; color:var(--muted);">信心分數</div>
-          <div class="conf-bar-bg"><div id="conf-bar" class="conf-bar"></div></div>
-          <div id="conf-text" style="font-size:20px; font-weight:700;"></div>
-          <div id="true-label" class="true-label" style="margin-top:8px;"></div>
-        </div>
-      </div>
+<main class="app-shell">
+  <nav class="topbar" aria-label="系統狀態">
+    <div class="brand"><div class="brand-mark" aria-hidden="true">S//AI</div><div><div class="brand-name">Sentinel AI</div><div class="brand-sub">Network Defense Lab</div></div></div>
+    <div class="top-actions"><div class="mode-pill">● 離線資料重播</div><div id="api-status" class="api-status"><span class="status-dot"></span><span>連線中</span></div></div>
+  </nav>
+  <header class="hero">
+    <div><div class="eyebrow">CIC-IDS2017 · Evaluation Console</div><h1>威脅流量重播實驗室</h1><p>重播真實標記流量，檢查模型如何辨識正常連線與 14 種攻擊。畫面會如實呈現錯誤、高信心漏報與跨時間驗證限制，不把離線測試包裝成正式即時監控。</p></div>
+    <div class="session-state"><span>目前工作階段</span><strong id="session-state">READY / 等待重播</strong></div>
+  </header>
+  <div id="error-banner" class="error-banner" role="alert"></div>
+  <section class="kpi-grid" aria-label="重播摘要">
+    <article class="kpi"><div class="kpi-label">已分析流量</div><div id="kpi-total" class="kpi-value">0</div><div id="kpi-total-note" class="kpi-note">共 0 筆可重播樣本</div></article>
+    <article class="kpi"><div class="kpi-label">模型判定攻擊</div><div id="kpi-attacks" class="kpi-value">0</div><div id="kpi-attack-note" class="kpi-note">模型判定比例 0.00%</div></article>
+    <article class="kpi warning"><div class="kpi-label">高風險漏報</div><div id="kpi-misses" class="kpi-value">0</div><div class="kpi-note">真實攻擊被判為正常</div></article>
+    <article class="kpi review"><div class="kpi-label">待人工複查</div><div id="kpi-review" class="kpi-value">0</div><div class="kpi-note">錯誤或信心低於 80%</div></article>
+  </section>
+  <section class="dashboard">
+    <div class="stack">
+      <section class="panel" aria-labelledby="traffic-title">
+        <div class="panel-head"><div><div class="panel-kicker">Detection timeline</div><h2 id="traffic-title" class="panel-title">實際攻擊率 vs 模型偵測率</h2></div><div class="legend"><span><i style="background:var(--red)"></i>實際攻擊</span><span><i style="background:var(--cyan)"></i>模型偵測</span></div></div>
+        <div class="panel-body"><div class="chart-wrap"><canvas id="traffic-chart" role="img" aria-label="最近五十筆流量的實際攻擊率與模型偵測率"></canvas><div id="chart-empty" class="chart-empty">開始重播後，這裡會顯示模型是否跟上真實攻擊流量</div></div></div>
+        <div class="model-audit" aria-label="模型驗證摘要"><div class="audit-cell"><div class="audit-label">隨機切分 · Macro F1</div><div id="metric-random" class="audit-value">—</div></div><div class="audit-cell"><div class="audit-label">類別內時間切分 · Macro F1</div><div id="metric-temporal" class="audit-value">—</div></div><div class="audit-cell"><div class="audit-label">跨日期二元驗證 · Recall</div><div id="metric-crossday" class="audit-value bad">—</div></div></div>
+      </section>
+      <section class="panel" aria-labelledby="alerts-title">
+        <div class="panel-head"><div><div class="panel-kicker">Evaluation event stream</div><h2 id="alerts-title" class="panel-title">流量事件與模型判斷</h2></div><div id="event-count" class="legend">0 events</div></div>
+        <div class="table-wrap"><table><thead><tr><th>事件</th><th>資料集真實標籤</th><th>模型預測</th><th>目的埠</th><th>信心</th><th>風險</th><th>評估</th></tr></thead><tbody id="event-body"><tr class="empty-row"><td colspan="7">尚無事件。使用右側控制器開始重播。</td></tr></tbody></table></div>
+      </section>
     </div>
-
-    <div class="panel">
-      <h2>近期預測紀錄（監控）</h2>
-      <table>
-        <thead>
-          <tr><th>時間</th><th>真實標籤</th><th>模型預測</th><th>是否攻擊</th><th>信心分數</th><th>是否正確</th></tr>
-        </thead>
-        <tbody id="log-body">
-          <tr class="empty-row"><td colspan="6">還沒有預測紀錄，左邊選一筆範例流量開始</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
+    <aside class="stack side-stack">
+      <section class="panel control-panel" aria-labelledby="control-title">
+        <div class="panel-head"><div><div class="panel-kicker">Replay control</div><h2 id="control-title" class="panel-title">資料重播控制器</h2></div><span id="sample-count" class="legend">載入中</span></div>
+        <div class="panel-body"><div class="control-grid"><div><label for="scenario-select">重播場景</label><select id="scenario-select" disabled><option>載入中…</option></select></div><div><label for="speed-select">播放速度</label><select id="speed-select"><option value="1200">1×</option><option value="600" selected>2×</option><option value="280">4×</option></select></div></div>
+          <div class="button-row"><button id="replay-btn" class="btn primary" disabled>開始重播</button><button id="step-btn" class="btn" disabled>單步分析</button><button id="reset-btn" class="btn icon" title="重設工作階段" aria-label="重設工作階段">↻</button></div>
+          <div class="replay-progress"><div class="progress-meta"><span id="progress-label">0 / 0</span><span id="progress-state">READY</span></div><div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div></div>
+          <div id="confidence-note" class="honesty-note">信心分數尚未完成正式機率校準；80% 是展示用複查門檻，不代表真實世界風險界線。</div>
+        </div>
+      </section>
+      <section class="panel" aria-labelledby="event-title">
+        <div class="panel-head"><div><div class="panel-kicker">Event inspector</div><h2 id="event-title" class="panel-title">目前事件</h2></div><span id="current-event-id" class="event-id">—</span></div>
+        <div class="panel-body"><div id="event-empty" class="event-empty">選擇「單步分析」或開始重播<br>查看單筆流量的模型判斷</div><div id="event-view" class="event-view"><div id="event-alert" class="event-alert"></div><div class="prediction-line"><div><div id="prediction-label" class="prediction-label">—</div><div id="prediction-truth" class="prediction-truth">—</div></div><div id="confidence-ring" class="confidence-ring"><span id="confidence-value">—</span></div></div><div id="flow-facts" class="flow-facts"></div><div id="top-predictions" class="top-predictions"></div></div></div>
+      </section>
+      <section class="panel" aria-labelledby="distribution-title"><div class="panel-head"><div><div class="panel-kicker">Detected categories</div><h2 id="distribution-title" class="panel-title">模型偵測攻擊分布</h2></div></div><div class="panel-body"><div id="distribution" class="distribution"><div class="dist-empty">尚未偵測到攻擊</div></div></div></section>
+    </aside>
+  </section>
+  <footer class="footer"><div><strong>資料來源：</strong>CIC-IDS2017 MachineLearningCSV · 本頁為離線評估重播，不連接真實網路。</div><div><strong>模型：</strong>Random Forest · 100 trees · 15 classes</div></footer>
+</main>
 <script>
-const API_BASE = "";
-let samples = [];
-const log = [];
-
-async function loadModelInfo() {
-  const res = await fetch(`${API_BASE}/model-info`);
-  const info = await res.json();
-  document.getElementById("model-info").innerHTML = `
-    <div class="stat-row"><span>Accuracy</span><span>${(info.accuracy * 100).toFixed(2)}%</span></div>
-    <div class="stat-row"><span>Macro Precision</span><span>${(info.macro_precision * 100).toFixed(2)}%</span></div>
-    <div class="stat-row"><span>Macro Recall</span><span>${(info.macro_recall * 100).toFixed(2)}%</span></div>
-    <div class="stat-row"><span>Macro F1</span><span>${(info.macro_f1 * 100).toFixed(2)}%</span></div>
-    <div class="stat-row"><span>攻擊類別數</span><span>${info.classes.length}</span></div>
-  `;
-}
-
-async function loadSamples() {
-  const res = await fetch(`${API_BASE}/samples`);
-  samples = await res.json();
-  const select = document.getElementById("sample-select");
-  select.innerHTML = samples.map((s, i) => `<option value="${i}">${s.label}</option>`).join("");
-}
-
-function renderResult(prediction, trueLabel) {
-  const result = document.getElementById("result");
-  const badge = document.getElementById("badge");
-  const confBar = document.getElementById("conf-bar");
-  const confText = document.getElementById("conf-text");
-  const trueLabelEl = document.getElementById("true-label");
-
-  result.classList.add("show");
-  badge.textContent = prediction.is_attack ? `攻擊：${prediction.attack_type}` : "正常流量（BENIGN）";
-  badge.className = "badge " + (prediction.is_attack ? "attack" : "benign");
-
-  const pct = (prediction.confidence * 100).toFixed(2);
-  confBar.style.width = pct + "%";
-  confBar.style.background = prediction.is_attack ? "var(--attack)" : "var(--benign)";
-  confText.textContent = pct + "%";
-
-  const correct = prediction.attack_type === trueLabel;
-  trueLabelEl.textContent = `真實標籤：${trueLabel}（${correct ? "預測正確" : "預測錯誤"}）`;
-  trueLabelEl.style.color = correct ? "var(--benign)" : "var(--attack)";
-  return correct;
-}
-
-function prependLog(entry) {
-  log.unshift(entry);
-  const tbody = document.getElementById("log-body");
-  tbody.innerHTML = log.slice(0, 20).map(e => `
-    <tr>
-      <td>${e.time}</td>
-      <td>${e.trueLabel}</td>
-      <td>${e.attackType}</td>
-      <td style="color:${e.isAttack ? 'var(--attack)' : 'var(--benign)'}">${e.isAttack ? "是" : "否"}</td>
-      <td>${(e.confidence * 100).toFixed(2)}%</td>
-      <td style="color:${e.correct ? 'var(--benign)' : 'var(--attack)'}">${e.correct ? "✓" : "✗"}</td>
-    </tr>
-  `).join("");
-}
-
-async function runPrediction() {
-  const btn = document.getElementById("predict-btn");
-  const idx = document.getElementById("sample-select").value;
-  const sample = samples[idx];
-  btn.disabled = true;
-  btn.textContent = "預測中…";
-  try {
-    const res = await fetch(`${API_BASE}/predict`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(sample.features),
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      alert("預測失敗：" + JSON.stringify(err.detail));
-      return;
-    }
-    const prediction = await res.json();
-    const correct = renderResult(prediction, sample.label);
-    prependLog({
-      time: new Date().toLocaleTimeString("zh-TW"),
-      trueLabel: sample.label,
-      attackType: prediction.attack_type,
-      isAttack: prediction.is_attack,
-      confidence: prediction.confidence,
-      correct,
-    });
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "執行預測";
-  }
-}
-
-document.getElementById("predict-btn").addEventListener("click", runPrediction);
-loadModelInfo();
-loadSamples();
+const API_BASE="", BENIGN="BENIGN";
+const state={modelInfo:null,samples:[],filtered:[],cursor:0,running:false,timer:null,busy:false,events:[],attackCounts:{},stats:{total:0,detected:0,misses:0,review:0}};
+const $=id=>document.getElementById(id);
+const normalizeLabel=value=>String(value??"").replace(/\u0096/g,"-").trim();
+const isBenign=label=>normalizeLabel(label).toUpperCase()===BENIGN;
+const pct=value=>`${(Number(value||0)*100).toFixed(2)}%`;
+const escapeHtml=value=>String(value).replace(/[&<>'"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
+const fmt=value=>{const n=Number(value);if(!Number.isFinite(n))return"—";if(Math.abs(n)>=1e6)return`${(n/1e6).toFixed(2)}M`;if(Math.abs(n)>=1e3)return n.toLocaleString("zh-TW",{maximumFractionDigits:1});return n.toLocaleString("zh-TW",{maximumFractionDigits:2});};
+function setApiStatus(online,text){const el=$("api-status");el.className=`api-status ${online?"online":"offline"}`;el.querySelector("span:last-child").textContent=text;}
+function showError(message){const banner=$("error-banner");banner.textContent=message;banner.classList.add("show");setApiStatus(false,"服務異常");}
+async function fetchJson(url,options){const response=await fetch(url,options);if(!response.ok){let detail=`HTTP ${response.status}`;try{detail=JSON.stringify((await response.json()).detail);}catch(_){}throw new Error(detail);}return response.json();}
+async function initialize(){try{const[modelInfo,samples]=await Promise.all([fetchJson(`${API_BASE}/model-info`),fetchJson(`${API_BASE}/samples`)]);state.modelInfo=modelInfo;state.samples=samples.map(sample=>({...sample,label:normalizeLabel(sample.label)}));setApiStatus(true,"模型服務在線");renderModelAudit();populateScenarios();applyScenario();$("confidence-note").textContent=modelInfo.confidence_note;$("replay-btn").disabled=false;$("step-btn").disabled=false;}catch(error){showError(`無法載入模型服務：${error.message}`);}drawChart();}
+function renderModelAudit(){const e=state.modelInfo.evaluation;$("metric-random").textContent=pct(e.random_multiclass.macro_f1);$("metric-temporal").textContent=pct(e.temporal_multiclass.macro_f1);$("metric-crossday").textContent=pct(e.cross_day_binary.recall);}
+function populateScenarios(){const labels=[...new Set(state.samples.map(sample=>sample.label))].sort();const select=$("scenario-select");select.innerHTML=[`<option value="all">全部流量（平衡展示集）</option>`,`<option value="attacks">只重播攻擊流量</option>`,...labels.map(label=>`<option value="${escapeHtml(label)}">${escapeHtml(label)}</option>`)].join("");select.disabled=false;}
+function applyScenario(){const scenario=$("scenario-select").value;if(scenario==="attacks")state.filtered=state.samples.filter(sample=>!isBenign(sample.label));else if(scenario==="all")state.filtered=[...state.samples];else state.filtered=state.samples.filter(sample=>sample.label===scenario);state.cursor=0;$("sample-count").textContent=`${state.filtered.length} flows`;$("kpi-total-note").textContent=`共 ${state.filtered.length} 筆可重播樣本`;updateProgress();}
+function toggleReplay(){state.running?pauseReplay():startReplay();}
+function startReplay(){if(!state.filtered.length||state.running)return;state.running=true;$("replay-btn").textContent="暫停重播";$("replay-btn").classList.add("danger");$("session-state").textContent="LIVE / 流量重播中";$("progress-state").textContent="PLAYING";replayTick();}
+function pauseReplay(){state.running=false;clearTimeout(state.timer);$("replay-btn").textContent="繼續重播";$("replay-btn").classList.remove("danger");$("session-state").textContent="PAUSED / 已暫停";$("progress-state").textContent="PAUSED";}
+async function replayTick(){if(!state.running)return;await processNext();if(state.cursor>=state.filtered.length){pauseReplay();$("replay-btn").textContent="重新播放";$("session-state").textContent="COMPLETE / 重播完成";$("progress-state").textContent="COMPLETE";return;}state.timer=setTimeout(replayTick,Number($("speed-select").value));}
+async function processNext(){if(state.busy||!state.filtered.length)return;if(state.cursor>=state.filtered.length)state.cursor=0;const sample=state.filtered[state.cursor];state.busy=true;$("step-btn").disabled=true;try{const prediction=await fetchJson(`${API_BASE}/predict`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(sample.features)});state.cursor+=1;recordEvent(sample,prediction);}catch(error){pauseReplay();showError(`預測失敗：${error.message}`);}finally{state.busy=false;$("step-btn").disabled=false;updateProgress();}}
+function recordEvent(sample,prediction){const trueLabel=normalizeLabel(sample.label),predictedLabel=normalizeLabel(prediction.attack_type),correct=trueLabel===predictedLabel,actualAttack=!isBenign(trueLabel),falseNegative=actualAttack&&!prediction.is_attack,falsePositive=!actualAttack&&prediction.is_attack,review=!correct||prediction.low_confidence,severity=falseNegative?"critical":(!correct?"high":(prediction.is_attack?"medium":"low"));const event={id:`EV-${String(state.stats.total+1).padStart(4,"0")}`,time:new Date().toLocaleTimeString("zh-TW",{hour12:false}),sample,prediction,trueLabel,predictedLabel,correct,actualAttack,falseNegative,falsePositive,review,severity};state.stats.total+=1;if(prediction.is_attack)state.stats.detected+=1;if(falseNegative)state.stats.misses+=1;if(review)state.stats.review+=1;if(prediction.is_attack)state.attackCounts[predictedLabel]=(state.attackCounts[predictedLabel]||0)+1;state.events.unshift(event);if(state.events.length>100)state.events.pop();renderStats();renderEvents();renderCurrentEvent(event);renderDistribution();drawChart();}
+function renderStats(){$("kpi-total").textContent=state.stats.total.toLocaleString();$("kpi-attacks").textContent=state.stats.detected.toLocaleString();$("kpi-misses").textContent=state.stats.misses.toLocaleString();$("kpi-review").textContent=state.stats.review.toLocaleString();const rate=state.stats.total?state.stats.detected/state.stats.total:0;$("kpi-attack-note").textContent=`模型判定比例 ${pct(rate)}`;$("event-count").textContent=`${state.stats.total} events`;}
+function riskTag(event){if(event.falseNegative)return`<span class="tag critical">Critical 漏報</span>`;if(event.review)return`<span class="tag review">需要複查</span>`;return`<span class="tag ${event.prediction.is_attack?"attack":"normal"}">${event.prediction.is_attack?"攻擊":"正常"}</span>`;}
+function renderEvents(){const body=$("event-body");if(!state.events.length)return;body.innerHTML=state.events.slice(0,40).map((event,index)=>`<tr data-event-index="${index}" class="${event.falseNegative?"false-negative":""}"><td class="event-id">${event.id}<br><small>${event.time}</small></td><td>${escapeHtml(event.trueLabel)}</td><td>${escapeHtml(event.predictedLabel)}</td><td>${fmt(event.sample.features.destination_port)}</td><td>${pct(event.prediction.confidence)}</td><td>${riskTag(event)}</td><td><span class="tag ${event.correct?"correct":"wrong"}">${event.correct?"正確":"錯誤"}</span></td></tr>`).join("");body.querySelectorAll("tr").forEach(row=>row.addEventListener("click",()=>renderCurrentEvent(state.events[Number(row.dataset.eventIndex)])));}
+function renderCurrentEvent(event){$("event-empty").style.display="none";$("event-view").classList.add("show");$("current-event-id").textContent=event.id;$("prediction-label").textContent=event.prediction.is_attack?event.predictedLabel:"BENIGN / 正常流量";$("prediction-truth").textContent=`資料集真實標籤：${event.trueLabel}`;$("confidence-value").textContent=pct(event.prediction.confidence);$("confidence-ring").style.setProperty("--confidence",`${event.prediction.confidence*100}%`);const alert=$("event-alert");alert.className="event-alert";if(event.falseNegative){alert.textContent="CRITICAL — 攻擊被模型判為正常（高風險漏報）";alert.classList.add("show","critical");}else if(event.review){alert.textContent=event.correct?"信心偏低，建議人工複查":"模型預測錯誤，已加入複查佇列";alert.classList.add("show","review");}const f=event.sample.features,protocol=({6:"TCP",17:"UDP",1:"ICMP"})[Math.round(f.protocol)]||fmt(f.protocol);$("flow-facts").innerHTML=[["Source Port",fmt(f.source_port)],["Destination Port",fmt(f.destination_port)],["Protocol",protocol],["Flow Duration",fmt(f.flow_duration)],["Forward Packets",fmt(f.total_fwd_packets)],["Backward Packets",fmt(f.total_backward_packets)]].map(([label,value])=>`<div class="fact"><span>${label}</span><strong>${value}</strong></div>`).join("");$("top-predictions").innerHTML=event.prediction.top_predictions.map(item=>`<div class="prob-row"><span title="${escapeHtml(item.label)}">${escapeHtml(item.label)}</span><div class="prob-track"><div class="prob-fill" style="width:${item.confidence*100}%"></div></div><strong>${Math.round(item.confidence*100)}%</strong></div>`).join("");}
+function renderDistribution(){const entries=Object.entries(state.attackCounts).sort((a,b)=>b[1]-a[1]),container=$("distribution");if(!entries.length){container.innerHTML=`<div class="dist-empty">尚未偵測到攻擊</div>`;return;}const max=entries[0][1];container.innerHTML=entries.slice(0,7).map(([label,count])=>`<div class="dist-row"><span class="dist-label" title="${escapeHtml(label)}">${escapeHtml(label)}</span><div class="dist-track"><div class="dist-fill" style="width:${count/max*100}%"></div></div><span class="dist-count">${count}</span></div>`).join("");}
+function updateProgress(){const total=state.filtered.length,current=Math.min(state.cursor,total);$("progress-label").textContent=`${current} / ${total}`;$("progress-fill").style.width=total?`${current/total*100}%`:"0%";}
+function resetSession(){pauseReplay();state.cursor=0;state.events=[];state.attackCounts={};state.stats={total:0,detected:0,misses:0,review:0};$("replay-btn").textContent="開始重播";$("session-state").textContent="READY / 等待重播";$("progress-state").textContent="READY";$("event-count").textContent="0 events";$("event-body").innerHTML=`<tr class="empty-row"><td colspan="7">尚無事件。使用右側控制器開始重播。</td></tr>`;$("event-empty").style.display="grid";$("event-view").classList.remove("show");$("current-event-id").textContent="—";renderStats();renderDistribution();updateProgress();drawChart();}
+function drawChart(){const canvas=$("traffic-chart"),rect=canvas.getBoundingClientRect(),ratio=window.devicePixelRatio||1;canvas.width=Math.max(1,rect.width*ratio);canvas.height=Math.max(1,rect.height*ratio);const ctx=canvas.getContext("2d");ctx.scale(ratio,ratio);const width=rect.width,height=rect.height;ctx.clearRect(0,0,width,height);const events=[...state.events].reverse().slice(-50);$("chart-empty").classList.toggle("hidden",events.length>0);const left=34,right=10,top=14,bottom=24,plotW=width-left-right,plotH=height-top-bottom;ctx.strokeStyle="rgba(82,106,119,.22)";ctx.lineWidth=1;ctx.font="9px ui-sans-serif";ctx.fillStyle="#526a77";ctx.textAlign="right";[0,.5,1].forEach(value=>{const y=top+plotH*(1-value);ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(width-right,y);ctx.stroke();ctx.fillText(`${Math.round(value*100)}%`,left-7,y+3);});if(!events.length)return;const buckets=[];for(let i=0;i<events.length;i+=5){const group=events.slice(i,i+5);buckets.push({actual:group.filter(event=>event.actualAttack).length/group.length,detected:group.filter(event=>event.prediction.is_attack).length/group.length});}const drawLine=(key,color)=>{ctx.strokeStyle=color;ctx.lineWidth=2;ctx.lineJoin="round";ctx.lineCap="round";ctx.beginPath();buckets.forEach((bucket,i)=>{const x=left+(buckets.length===1?plotW/2:i/(buckets.length-1)*plotW),y=top+(1-bucket[key])*plotH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.stroke();buckets.forEach((bucket,i)=>{const x=left+(buckets.length===1?plotW/2:i/(buckets.length-1)*plotW),y=top+(1-bucket[key])*plotH;ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fill();});};drawLine("actual","#ff6170");drawLine("detected","#3dd9c4");}
+$("replay-btn").addEventListener("click",toggleReplay);$("step-btn").addEventListener("click",processNext);$("reset-btn").addEventListener("click",resetSession);$("scenario-select").addEventListener("change",()=>{pauseReplay();applyScenario();});window.addEventListener("resize",drawChart);initialize();
 </script>
 </body>
 </html>
