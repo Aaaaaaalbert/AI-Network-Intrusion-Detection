@@ -1,0 +1,1101 @@
+held_out_attack,source_file,binary_prediction,binary_confidence,binary_attack_probability,multiclass_prediction,multiclass_confidence
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.94
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.88,0.12,BENIGN,0.96
+Bot,,0,0.98,0.02,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.9,0.1,BENIGN,0.9
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.9,0.1,BENIGN,0.92
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.96,0.04,BENIGN,0.96
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.9,0.1,BENIGN,0.86
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.9
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.94
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.98,0.02,BENIGN,0.94
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,0.94
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.82,0.18,BENIGN,0.88
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.94,0.06,BENIGN,0.94
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.98,0.02,BENIGN,1.0
+Bot,,0,0.9,0.1,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.94,0.06,BENIGN,0.94
+Bot,,0,0.94,0.06,BENIGN,0.94
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.98,0.02,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.9
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.98,0.02,BENIGN,0.96
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.98,0.02,BENIGN,1.0
+Bot,,0,0.98,0.02,BENIGN,1.0
+Bot,,0,1.0,0.0,BENIGN,1.0
+Bot,,0,0.96,0.04,BENIGN,0.92
+Bot,,0,0.96,0.04,BENIGN,0.9
+Bot,,0,1.0,0.0,BENIGN,1.0
+DDoS,,1,0.76,0.76,PortScan,0.48
+DDoS,,1,0.94,0.94,DoS Hulk,0.96
+DDoS,,1,0.94,0.94,DoS Hulk,0.92
+DDoS,,0,0.86,0.14,BENIGN,0.92
+DDoS,,1,0.88,0.88,DoS Hulk,0.98
+DDoS,,0,0.74,0.26,BENIGN,0.84
+DDoS,,0,0.86,0.14,BENIGN,0.9
+DDoS,,0,0.82,0.18,BENIGN,0.86
+DDoS,,1,0.78,0.78,PortScan,0.52
+DDoS,,0,0.84,0.16,BENIGN,0.82
+DDoS,,1,0.78,0.78,PortScan,0.44
+DDoS,,0,0.84,0.16,BENIGN,0.9
+DDoS,,1,0.8,0.8,PortScan,0.5
+DDoS,,1,0.9,0.9,DoS Hulk,0.84
+DDoS,,1,0.72,0.72,PortScan,0.44
+DDoS,,0,0.84,0.16,BENIGN,0.86
+DDoS,,0,0.82,0.18,BENIGN,0.9
+DDoS,,0,0.82,0.18,BENIGN,0.86
+DDoS,,1,0.82,0.82,PortScan,0.46
+DDoS,,0,0.84,0.16,BENIGN,0.9
+DDoS,,1,0.64,0.64,PortScan,0.42
+DDoS,,1,0.66,0.66,PortScan,0.4
+DDoS,,1,0.76,0.76,PortScan,0.36
+DDoS,,0,0.84,0.16,BENIGN,0.68
+DDoS,,0,0.82,0.18,BENIGN,0.82
+DDoS,,1,0.8,0.8,PortScan,0.46
+DDoS,,1,0.68,0.68,PortScan,0.42
+DDoS,,0,0.84,0.16,BENIGN,0.9
+DDoS,,1,0.8,0.8,PortScan,0.44
+DDoS,,1,0.7,0.7,PortScan,0.42
+DDoS,,0,0.8,0.2,BENIGN,0.7
+DDoS,,1,0.76,0.76,PortScan,0.46
+DDoS,,1,0.8,0.8,PortScan,0.46
+DDoS,,1,0.8,0.8,PortScan,0.44
+DDoS,,1,0.78,0.78,PortScan,0.42
+DDoS,,1,0.8,0.8,PortScan,0.42
+DDoS,,0,0.82,0.18,BENIGN,0.88
+DDoS,,1,0.82,0.82,PortScan,0.46
+DDoS,,1,0.8,0.8,PortScan,0.44
+DDoS,,0,0.84,0.16,BENIGN,0.88
+DDoS,,0,0.86,0.14,BENIGN,0.82
+DDoS,,0,0.82,0.18,BENIGN,0.88
+DDoS,,1,0.68,0.68,PortScan,0.4
+DDoS,,1,0.92,0.92,DoS Hulk,0.82
+DDoS,,1,0.92,0.92,DoS Hulk,0.84
+DDoS,,0,0.8,0.2,BENIGN,0.88
+DDoS,,1,0.9,0.9,DoS Hulk,0.94
+DDoS,,0,0.84,0.16,BENIGN,0.9
+DDoS,,0,0.84,0.16,BENIGN,0.78
+DDoS,,1,0.9,0.9,DoS Hulk,0.94
+DDoS,,1,0.94,0.94,DoS Hulk,0.96
+DDoS,,1,0.78,0.78,PortScan,0.42
+DDoS,,1,0.66,0.66,PortScan,0.44
+DDoS,,1,0.9,0.9,DoS Hulk,0.82
+DDoS,,1,0.8,0.8,PortScan,0.4
+DDoS,,1,0.76,0.76,PortScan,0.38
+DDoS,,1,0.64,0.64,PortScan,0.42
+DDoS,,1,0.92,0.92,DoS Hulk,0.84
+DDoS,,1,0.94,0.94,DoS Hulk,0.96
+DDoS,,0,0.84,0.16,BENIGN,0.9
+DDoS,,1,0.68,0.68,BENIGN,0.38
+DDoS,,0,0.82,0.18,BENIGN,0.82
+DDoS,,1,0.8,0.8,PortScan,0.46
+DDoS,,1,0.94,0.94,DoS Hulk,0.82
+DDoS,,0,0.84,0.16,BENIGN,0.76
+DDoS,,1,0.86,0.86,DoS Hulk,0.84
+DDoS,,0,0.82,0.18,BENIGN,0.92
+DDoS,,1,0.78,0.78,PortScan,0.46
+DDoS,,1,0.9,0.9,DoS Hulk,0.84
+DDoS,,1,0.66,0.66,PortScan,0.44
+DDoS,,1,0.78,0.78,PortScan,0.44
+DDoS,,1,0.8,0.8,PortScan,0.4
+DDoS,,1,0.76,0.76,PortScan,0.36
+DDoS,,1,0.68,0.68,PortScan,0.38
+DDoS,,0,0.86,0.14,BENIGN,0.9
+DDoS,,1,0.8,0.8,PortScan,0.44
+DDoS,,1,0.78,0.78,PortScan,0.52
+DDoS,,1,0.92,0.92,DoS Hulk,0.96
+DDoS,,1,0.78,0.78,PortScan,0.42
+DDoS,,1,0.76,0.76,BENIGN,0.36
+DDoS,,1,0.76,0.76,PortScan,0.42
+DDoS,,1,0.76,0.76,PortScan,0.46
+DDoS,,1,0.72,0.72,PortScan,0.42
+DDoS,,0,0.84,0.16,BENIGN,0.9
+DDoS,,0,0.86,0.14,BENIGN,0.9
+DDoS,,0,0.84,0.16,BENIGN,0.92
+DDoS,,1,0.8,0.8,PortScan,0.46
+DDoS,,1,0.74,0.74,PortScan,0.44
+DDoS,,1,0.76,0.76,PortScan,0.34
+DDoS,,0,0.82,0.18,BENIGN,0.86
+DDoS,,0,0.82,0.18,BENIGN,0.86
+DDoS,,1,0.68,0.68,PortScan,0.42
+DDoS,,1,0.64,0.64,PortScan,0.46
+DDoS,,1,0.72,0.72,PortScan,0.38
+DDoS,,1,0.86,0.86,DoS Hulk,0.96
+DDoS,,0,0.86,0.14,BENIGN,0.9
+DDoS,,0,0.86,0.14,BENIGN,0.8
+DDoS,,1,0.68,0.68,BENIGN,0.38
+DDoS,,0,0.82,0.18,BENIGN,0.9
+DDoS,,0,0.8,0.2,BENIGN,0.84
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.5
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.48
+DoS GoldenEye,,1,0.52,0.52,BENIGN,0.48
+DoS GoldenEye,,0,0.68,0.32,BENIGN,0.7
+DoS GoldenEye,,1,0.96,0.96,DoS Hulk,0.64
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS GoldenEye,,1,0.96,0.96,DoS Hulk,0.44
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.52
+DoS GoldenEye,,0,0.66,0.34,BENIGN,0.54
+DoS GoldenEye,,1,0.86,0.86,DoS Hulk,0.44
+DoS GoldenEye,,0,0.92,0.08,BENIGN,0.88
+DoS GoldenEye,,0,0.68,0.32,BENIGN,0.56
+DoS GoldenEye,,0,0.56,0.44,BENIGN,0.5
+DoS GoldenEye,,0,0.9,0.1,BENIGN,0.86
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.58
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS GoldenEye,,0,0.64,0.36,BENIGN,0.54
+DoS GoldenEye,,1,0.82,0.82,BENIGN,0.46
+DoS GoldenEye,,1,0.7,0.7,BENIGN,0.46
+DoS GoldenEye,,1,0.8,0.8,BENIGN,0.36
+DoS GoldenEye,,1,0.94,0.94,DoS Hulk,0.44
+DoS GoldenEye,,1,0.94,0.94,DoS Hulk,0.44
+DoS GoldenEye,,0,0.58,0.42,BENIGN,0.46
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.56
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.54
+DoS GoldenEye,,0,0.66,0.34,BENIGN,0.6
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.54
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.56
+DoS GoldenEye,,1,0.96,0.96,DoS Hulk,0.48
+DoS GoldenEye,,0,0.7,0.3,BENIGN,0.58
+DoS GoldenEye,,1,0.8,0.8,DoS Hulk,0.5
+DoS GoldenEye,,0,0.78,0.22,BENIGN,0.7
+DoS GoldenEye,,0,0.66,0.34,BENIGN,0.56
+DoS GoldenEye,,0,0.58,0.42,BENIGN,0.46
+DoS GoldenEye,,0,0.68,0.32,DoS Slowhttptest,0.46
+DoS GoldenEye,,1,0.96,0.96,DoS Hulk,0.48
+DoS GoldenEye,,0,0.64,0.36,BENIGN,0.74
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.52
+DoS GoldenEye,,0,0.68,0.32,BENIGN,0.7
+DoS GoldenEye,,0,0.64,0.36,BENIGN,0.46
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.56
+DoS GoldenEye,,0,0.88,0.12,BENIGN,0.78
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.48
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.62
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.62
+DoS GoldenEye,,1,0.76,0.76,DoS Hulk,0.44
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.56
+DoS GoldenEye,,1,0.52,0.52,BENIGN,0.5
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.48
+DoS GoldenEye,,1,0.94,0.94,DoS Hulk,0.5
+DoS GoldenEye,,1,0.88,0.88,BENIGN,0.38
+DoS GoldenEye,,1,0.92,0.92,DoS Hulk,0.4
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.52
+DoS GoldenEye,,1,0.66,0.66,BENIGN,0.38
+DoS GoldenEye,,0,0.66,0.34,BENIGN,0.52
+DoS GoldenEye,,0,0.7,0.3,BENIGN,0.58
+DoS GoldenEye,,0,0.64,0.36,BENIGN,0.56
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.44
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.54
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.52
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.5
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.58
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.52
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.52
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.52
+DoS GoldenEye,,0,0.66,0.34,BENIGN,0.6
+DoS GoldenEye,,0,0.56,0.44,BENIGN,0.42
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.62
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.5
+DoS GoldenEye,,1,0.66,0.66,BENIGN,0.36
+DoS GoldenEye,,1,0.58,0.58,BENIGN,0.36
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.48
+DoS GoldenEye,,0,0.68,0.32,BENIGN,0.52
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.66
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS GoldenEye,,0,0.68,0.32,BENIGN,0.56
+DoS GoldenEye,,1,0.72,0.72,BENIGN,0.52
+DoS GoldenEye,,0,0.68,0.32,BENIGN,0.56
+DoS GoldenEye,,0,0.66,0.34,DoS Slowhttptest,0.5
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.48
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.58
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.58
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS GoldenEye,,1,0.86,0.86,DoS Hulk,0.88
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.54
+DoS GoldenEye,,0,0.66,0.34,BENIGN,0.56
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.5
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.52
+DoS GoldenEye,,0,0.7,0.3,DoS Slowhttptest,0.44
+DoS GoldenEye,,1,0.98,0.98,DoS Hulk,0.44
+DoS GoldenEye,,0,0.62,0.38,BENIGN,0.64
+DoS GoldenEye,,1,0.94,0.94,DoS Hulk,0.64
+DoS GoldenEye,,0,0.7,0.3,BENIGN,0.66
+DoS GoldenEye,,0,0.66,0.34,BENIGN,0.54
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.62
+DoS GoldenEye,,1,0.76,0.76,DoS Hulk,0.42
+DoS GoldenEye,,1,1.0,1.0,DoS Hulk,0.56
+DoS Hulk,,1,0.88,0.88,PortScan,0.76
+DoS Hulk,,1,0.8,0.8,BENIGN,0.54
+DoS Hulk,,0,0.8,0.2,BENIGN,0.82
+DoS Hulk,,0,0.86,0.14,BENIGN,0.88
+DoS Hulk,,1,0.74,0.74,BENIGN,0.58
+DoS Hulk,,1,0.54,0.54,BENIGN,0.56
+DoS Hulk,,0,0.76,0.24,BENIGN,0.86
+DoS Hulk,,0,0.88,0.12,BENIGN,0.9
+DoS Hulk,,0,0.7,0.3,BENIGN,0.78
+DoS Hulk,,0,0.8,0.2,BENIGN,0.76
+DoS Hulk,,1,0.56,0.56,BENIGN,0.6
+DoS Hulk,,1,0.76,0.76,BENIGN,0.36
+DoS Hulk,,1,0.52,0.52,BENIGN,0.62
+DoS Hulk,,1,0.84,0.84,BENIGN,0.36
+DoS Hulk,,0,0.78,0.22,BENIGN,0.82
+DoS Hulk,,1,0.72,0.72,BENIGN,0.58
+DoS Hulk,,1,0.78,0.78,DoS GoldenEye,0.38
+DoS Hulk,,1,0.54,0.54,BENIGN,0.56
+DoS Hulk,,1,0.52,0.52,BENIGN,0.7
+DoS Hulk,,1,0.72,0.72,BENIGN,0.54
+DoS Hulk,,1,0.56,0.56,BENIGN,0.56
+DoS Hulk,,0,0.76,0.24,BENIGN,0.86
+DoS Hulk,,1,0.52,0.52,BENIGN,0.54
+DoS Hulk,,0,0.78,0.22,BENIGN,0.82
+DoS Hulk,,1,0.76,0.76,DoS GoldenEye,0.34
+DoS Hulk,,1,0.72,0.72,BENIGN,0.44
+DoS Hulk,,0,0.84,0.16,BENIGN,0.82
+DoS Hulk,,1,0.82,0.82,DoS GoldenEye,0.42
+DoS Hulk,,0,0.76,0.24,BENIGN,0.84
+DoS Hulk,,1,0.54,0.54,BENIGN,0.5
+DoS Hulk,,0,0.76,0.24,BENIGN,0.8
+DoS Hulk,,1,0.74,0.74,BENIGN,0.58
+DoS Hulk,,1,0.8,0.8,BENIGN,0.36
+DoS Hulk,,0,0.78,0.22,BENIGN,0.86
+DoS Hulk,,0,0.76,0.24,BENIGN,0.82
+DoS Hulk,,1,0.76,0.76,BENIGN,0.56
+DoS Hulk,,1,0.78,0.78,BENIGN,0.56
+DoS Hulk,,1,0.82,0.82,BENIGN,0.36
+DoS Hulk,,1,0.56,0.56,BENIGN,0.58
+DoS Hulk,,0,0.78,0.22,BENIGN,0.86
+DoS Hulk,,1,0.7,0.7,BENIGN,0.56
+DoS Hulk,,1,0.78,0.78,BENIGN,0.36
+DoS Hulk,,0,0.76,0.24,BENIGN,0.86
+DoS Hulk,,1,0.56,0.56,BENIGN,0.52
+DoS Hulk,,0,0.9,0.1,BENIGN,0.92
+DoS Hulk,,0,0.8,0.2,BENIGN,0.84
+DoS Hulk,,1,0.74,0.74,BENIGN,0.4
+DoS Hulk,,1,0.86,0.86,DoS GoldenEye,0.38
+DoS Hulk,,1,0.84,0.84,DoS GoldenEye,0.38
+DoS Hulk,,0,0.58,0.42,BENIGN,0.64
+DoS Hulk,,1,0.82,0.82,BENIGN,0.34
+DoS Hulk,,1,0.54,0.54,BENIGN,0.58
+DoS Hulk,,1,0.52,0.52,BENIGN,0.56
+DoS Hulk,,1,0.7,0.7,BENIGN,0.44
+DoS Hulk,,1,0.72,0.72,BENIGN,0.56
+DoS Hulk,,1,0.78,0.78,DoS GoldenEye,0.36
+DoS Hulk,,0,1.0,0.0,BENIGN,1.0
+DoS Hulk,,0,0.76,0.24,BENIGN,0.84
+DoS Hulk,,1,0.82,0.82,BENIGN,0.34
+DoS Hulk,,1,0.74,0.74,BENIGN,0.58
+DoS Hulk,,1,0.74,0.74,BENIGN,0.56
+DoS Hulk,,1,0.54,0.54,BENIGN,0.56
+DoS Hulk,,1,0.68,0.68,PortScan,0.48
+DoS Hulk,,1,0.78,0.78,BENIGN,0.36
+DoS Hulk,,1,0.54,0.54,BENIGN,0.58
+DoS Hulk,,0,0.76,0.24,BENIGN,0.84
+DoS Hulk,,1,0.86,0.86,DoS GoldenEye,0.38
+DoS Hulk,,1,0.8,0.8,BENIGN,0.34
+DoS Hulk,,0,0.82,0.18,BENIGN,0.78
+DoS Hulk,,1,0.56,0.56,BENIGN,0.54
+DoS Hulk,,1,0.52,0.52,BENIGN,0.58
+DoS Hulk,,1,0.68,0.68,PortScan,0.4
+DoS Hulk,,1,0.82,0.82,DoS GoldenEye,0.34
+DoS Hulk,,1,0.64,0.64,BENIGN,0.6
+DoS Hulk,,1,0.58,0.58,BENIGN,0.56
+DoS Hulk,,1,0.84,0.84,DoS GoldenEye,0.36
+DoS Hulk,,1,0.82,0.82,DoS GoldenEye,0.34
+DoS Hulk,,0,0.78,0.22,BENIGN,0.82
+DoS Hulk,,1,0.76,0.76,BENIGN,0.56
+DoS Hulk,,1,0.82,0.82,PortScan,0.68
+DoS Hulk,,1,0.62,0.62,BENIGN,0.54
+DoS Hulk,,1,0.82,0.82,BENIGN,0.36
+DoS Hulk,,1,0.56,0.56,BENIGN,0.56
+DoS Hulk,,1,0.64,0.64,BENIGN,0.56
+DoS Hulk,,1,0.82,0.82,DoS GoldenEye,0.32
+DoS Hulk,,1,0.8,0.8,BENIGN,0.52
+DoS Hulk,,0,0.52,0.48,BENIGN,0.6
+DoS Hulk,,0,0.9,0.1,BENIGN,0.92
+DoS Hulk,,0,0.5,0.5,BENIGN,0.76
+DoS Hulk,,1,0.56,0.56,BENIGN,0.56
+DoS Hulk,,0,0.74,0.26,BENIGN,0.82
+DoS Hulk,,1,0.82,0.82,BENIGN,0.36
+DoS Hulk,,1,0.74,0.74,BENIGN,0.58
+DoS Hulk,,1,0.66,0.66,BENIGN,0.44
+DoS Hulk,,1,0.72,0.72,BENIGN,0.4
+DoS Hulk,,0,0.5,0.5,BENIGN,0.56
+DoS Hulk,,1,0.56,0.56,BENIGN,0.58
+DoS Hulk,,1,0.7,0.7,PortScan,0.44
+DoS Hulk,,0,0.66,0.34,BENIGN,0.78
+DoS Hulk,,1,0.8,0.8,BENIGN,0.36
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.42
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.5
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.56
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.54
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.44
+DoS Slowhttptest,,0,0.56,0.44,BENIGN,0.64
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.64
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.48
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.54
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.68
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.48
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.44
+DoS Slowhttptest,,1,0.54,0.54,DoS slowloris,0.62
+DoS Slowhttptest,,1,0.96,0.96,DoS slowloris,0.42
+DoS Slowhttptest,,1,0.56,0.56,BENIGN,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.5
+DoS Slowhttptest,,0,0.56,0.44,BENIGN,0.64
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.54
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.56
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.64
+DoS Slowhttptest,,0,0.88,0.12,BENIGN,0.76
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.48
+DoS Slowhttptest,,1,0.56,0.56,BENIGN,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.6
+DoS Slowhttptest,,0,0.56,0.44,BENIGN,0.64
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.44
+DoS Slowhttptest,,1,0.88,0.88,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.58
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.54
+DoS Slowhttptest,,1,0.58,0.58,BENIGN,0.52
+DoS Slowhttptest,,0,0.86,0.14,BENIGN,0.66
+DoS Slowhttptest,,1,0.94,0.94,DoS GoldenEye,0.46
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.84,0.84,DoS slowloris,0.52
+DoS Slowhttptest,,0,0.56,0.44,BENIGN,0.64
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.56
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.52
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.64
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.52
+DoS Slowhttptest,,1,0.84,0.84,DoS slowloris,0.52
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.42
+DoS Slowhttptest,,1,0.9,0.9,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.54
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.52
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.44
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.96,0.96,DoS slowloris,0.48
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.84,0.84,DoS slowloris,0.52
+DoS Slowhttptest,,0,0.86,0.14,BENIGN,0.66
+DoS Slowhttptest,,1,0.54,0.54,BENIGN,0.56
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.46
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.44
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.5
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.52
+DoS Slowhttptest,,1,0.58,0.58,BENIGN,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.6
+DoS Slowhttptest,,1,0.68,0.68,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.9,0.9,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.64
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.48
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.56
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.44
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.44
+DoS Slowhttptest,,0,0.56,0.44,BENIGN,0.64
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.6
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.48
+DoS Slowhttptest,,1,0.88,0.88,DoS slowloris,0.44
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.44
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.6
+DoS Slowhttptest,,1,0.96,0.96,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.64
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.94,0.94,DoS slowloris,0.5
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.46
+DoS Slowhttptest,,1,0.96,0.96,DoS slowloris,0.52
+DoS Slowhttptest,,1,0.86,0.86,DoS slowloris,0.54
+DoS Slowhttptest,,1,0.66,0.66,BENIGN,0.46
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.44
+DoS Slowhttptest,,0,0.56,0.44,BENIGN,0.64
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.54
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.46
+DoS Slowhttptest,,1,0.54,0.54,BENIGN,0.56
+DoS Slowhttptest,,1,0.9,0.9,DoS GoldenEye,0.52
+DoS Slowhttptest,,1,0.92,0.92,DoS GoldenEye,0.48
+DoS Slowhttptest,,1,0.96,0.96,DoS slowloris,0.48
+DoS Slowhttptest,,1,0.88,0.88,DoS slowloris,0.48
+DoS Slowhttptest,,1,0.92,0.92,DoS slowloris,0.74
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.82,0.82,DoS GoldenEye,0.48
+DoS slowloris,,1,0.82,0.82,DoS GoldenEye,0.5
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,1.0,1.0,DoS Slowhttptest,0.98
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.42
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.44
+DoS slowloris,,1,0.74,0.74,BENIGN,0.4
+DoS slowloris,,1,0.84,0.84,BENIGN,0.5
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.5
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.78,0.78,BENIGN,0.42
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.44
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.46
+DoS slowloris,,1,0.88,0.88,DoS GoldenEye,0.52
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.4
+DoS slowloris,,1,0.78,0.78,BENIGN,0.42
+DoS slowloris,,1,0.8,0.8,DoS Slowhttptest,0.52
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.48
+DoS slowloris,,1,0.7,0.7,BENIGN,0.52
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.76,0.76,BENIGN,0.42
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.44
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.44
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.46
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.44
+DoS slowloris,,1,0.76,0.76,BENIGN,0.46
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.46
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.58
+DoS slowloris,,0,0.54,0.46,BENIGN,0.6
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.44
+DoS slowloris,,1,0.76,0.76,BENIGN,0.42
+DoS slowloris,,1,0.7,0.7,BENIGN,0.52
+DoS slowloris,,0,0.56,0.44,BENIGN,0.6
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.48
+DoS slowloris,,1,0.66,0.66,DoS Slowhttptest,0.56
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.48
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.5
+DoS slowloris,,1,0.78,0.78,BENIGN,0.46
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.9,0.9,BENIGN,0.54
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.82,0.82,DoS GoldenEye,0.56
+DoS slowloris,,1,0.7,0.7,BENIGN,0.52
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.46
+DoS slowloris,,1,0.84,0.84,BENIGN,0.5
+DoS slowloris,,1,0.7,0.7,BENIGN,0.48
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.68,0.68,BENIGN,0.36
+DoS slowloris,,1,1.0,1.0,DoS Slowhttptest,1.0
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.48
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,1.0,1.0,DoS Slowhttptest,0.98
+DoS slowloris,,1,0.78,0.78,DoS Slowhttptest,0.48
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.44
+DoS slowloris,,1,1.0,1.0,DoS Slowhttptest,1.0
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.46
+DoS slowloris,,1,0.9,0.9,DoS GoldenEye,0.48
+DoS slowloris,,1,0.76,0.76,BENIGN,0.42
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.6
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.46
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.7,0.7,BENIGN,0.5
+DoS slowloris,,1,1.0,1.0,DoS Slowhttptest,0.98
+DoS slowloris,,1,0.86,0.86,DoS GoldenEye,0.6
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+DoS slowloris,,1,0.8,0.8,DoS Slowhttptest,0.56
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.8
+DoS slowloris,,1,0.94,0.94,DoS Slowhttptest,0.82
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.44
+FTP-Patator,,0,0.7,0.3,BENIGN,0.82
+FTP-Patator,,1,0.74,0.74,SSH-Patator,0.52
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.66,0.34,BENIGN,0.8
+FTP-Patator,,1,0.9,0.9,BENIGN,0.44
+FTP-Patator,,0,0.7,0.3,BENIGN,0.8
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.64,0.36,BENIGN,0.74
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.64,0.36,BENIGN,0.62
+FTP-Patator,,0,0.7,0.3,BENIGN,0.82
+FTP-Patator,,0,0.68,0.32,BENIGN,0.82
+FTP-Patator,,1,0.74,0.74,SSH-Patator,0.42
+FTP-Patator,,0,0.7,0.3,BENIGN,0.76
+FTP-Patator,,0,0.68,0.32,BENIGN,0.82
+FTP-Patator,,1,0.78,0.78,SSH-Patator,0.46
+FTP-Patator,,1,0.72,0.72,SSH-Patator,0.44
+FTP-Patator,,0,0.66,0.34,BENIGN,0.82
+FTP-Patator,,1,0.78,0.78,SSH-Patator,0.42
+FTP-Patator,,0,0.68,0.32,BENIGN,0.82
+FTP-Patator,,0,0.6,0.4,BENIGN,0.66
+FTP-Patator,,0,0.72,0.28,BENIGN,0.76
+FTP-Patator,,0,0.68,0.32,BENIGN,0.82
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.46
+FTP-Patator,,0,0.7,0.3,BENIGN,0.76
+FTP-Patator,,0,0.7,0.3,BENIGN,0.82
+FTP-Patator,,0,0.64,0.36,BENIGN,0.74
+FTP-Patator,,0,0.68,0.32,BENIGN,0.72
+FTP-Patator,,1,0.6,0.6,BENIGN,0.6
+FTP-Patator,,0,0.64,0.36,BENIGN,0.7
+FTP-Patator,,0,0.72,0.28,BENIGN,0.78
+FTP-Patator,,0,0.7,0.3,BENIGN,0.82
+FTP-Patator,,0,0.64,0.36,BENIGN,0.74
+FTP-Patator,,1,0.72,0.72,SSH-Patator,0.42
+FTP-Patator,,0,0.64,0.36,BENIGN,0.82
+FTP-Patator,,0,0.64,0.36,BENIGN,0.82
+FTP-Patator,,1,0.78,0.78,SSH-Patator,0.54
+FTP-Patator,,1,0.72,0.72,SSH-Patator,0.42
+FTP-Patator,,0,0.64,0.36,BENIGN,0.72
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,1,0.72,0.72,SSH-Patator,0.42
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.68,0.32,BENIGN,0.82
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.66,0.34,BENIGN,0.62
+FTP-Patator,,0,0.72,0.28,BENIGN,0.8
+FTP-Patator,,0,0.7,0.3,BENIGN,0.76
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,1,0.74,0.74,SSH-Patator,0.52
+FTP-Patator,,0,0.64,0.36,BENIGN,0.72
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.68,0.32,BENIGN,0.8
+FTP-Patator,,0,0.6,0.4,BENIGN,0.62
+FTP-Patator,,0,0.68,0.32,BENIGN,0.8
+FTP-Patator,,0,0.64,0.36,BENIGN,0.64
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.52
+FTP-Patator,,0,0.68,0.32,BENIGN,0.74
+FTP-Patator,,0,0.7,0.3,BENIGN,0.78
+FTP-Patator,,0,0.72,0.28,BENIGN,0.82
+FTP-Patator,,1,0.64,0.64,BENIGN,0.48
+FTP-Patator,,1,0.74,0.74,SSH-Patator,0.52
+FTP-Patator,,0,0.7,0.3,BENIGN,0.82
+FTP-Patator,,0,0.68,0.32,BENIGN,0.76
+FTP-Patator,,0,0.68,0.32,BENIGN,0.78
+FTP-Patator,,1,0.72,0.72,SSH-Patator,0.42
+FTP-Patator,,0,0.7,0.3,BENIGN,0.8
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.66,0.34,BENIGN,0.8
+FTP-Patator,,0,0.68,0.32,BENIGN,0.78
+FTP-Patator,,0,0.68,0.32,BENIGN,0.82
+FTP-Patator,,1,0.78,0.78,SSH-Patator,0.42
+FTP-Patator,,0,0.72,0.28,BENIGN,0.8
+FTP-Patator,,0,0.7,0.3,BENIGN,0.76
+FTP-Patator,,0,0.72,0.28,BENIGN,0.8
+FTP-Patator,,1,0.78,0.78,SSH-Patator,0.46
+FTP-Patator,,0,0.66,0.34,BENIGN,0.8
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.7,0.3,BENIGN,0.82
+FTP-Patator,,0,0.64,0.36,BENIGN,0.74
+FTP-Patator,,0,0.6,0.4,BENIGN,0.62
+FTP-Patator,,0,0.6,0.4,BENIGN,0.64
+FTP-Patator,,0,0.64,0.36,BENIGN,0.72
+FTP-Patator,,0,0.7,0.3,BENIGN,0.76
+FTP-Patator,,0,0.72,0.28,BENIGN,0.78
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.46
+FTP-Patator,,0,0.7,0.3,BENIGN,0.8
+FTP-Patator,,1,0.72,0.72,SSH-Patator,0.4
+FTP-Patator,,0,0.66,0.34,BENIGN,0.82
+FTP-Patator,,0,0.66,0.34,BENIGN,0.76
+FTP-Patator,,0,0.64,0.36,BENIGN,0.68
+FTP-Patator,,0,0.7,0.3,BENIGN,0.78
+FTP-Patator,,0,0.74,0.26,BENIGN,0.8
+FTP-Patator,,0,0.72,0.28,BENIGN,0.78
+FTP-Patator,,0,0.66,0.34,BENIGN,0.82
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.44
+FTP-Patator,,0,0.6,0.4,BENIGN,0.62
+FTP-Patator,,0,0.64,0.36,BENIGN,0.7
+FTP-Patator,,1,0.76,0.76,SSH-Patator,0.42
+FTP-Patator,,0,0.7,0.3,BENIGN,0.78
+PortScan,,0,0.96,0.04,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.86
+PortScan,,0,0.96,0.04,BENIGN,0.9
+PortScan,,0,0.96,0.04,BENIGN,0.9
+PortScan,,0,0.98,0.02,BENIGN,0.86
+PortScan,,0,0.94,0.06,BENIGN,0.88
+PortScan,,0,0.98,0.02,BENIGN,0.92
+PortScan,,0,0.88,0.12,BENIGN,0.84
+PortScan,,0,0.94,0.06,BENIGN,0.88
+PortScan,,0,1.0,0.0,BENIGN,1.0
+PortScan,,0,0.96,0.04,BENIGN,1.0
+PortScan,,0,0.96,0.04,BENIGN,0.96
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.88
+PortScan,,0,0.96,0.04,BENIGN,0.94
+PortScan,,0,0.96,0.04,BENIGN,0.96
+PortScan,,0,1.0,0.0,BENIGN,0.94
+PortScan,,0,0.96,0.04,BENIGN,0.86
+PortScan,,0,1.0,0.0,BENIGN,0.98
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.96,0.04,BENIGN,0.96
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.92,0.08,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.88
+PortScan,,0,0.92,0.08,BENIGN,0.88
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.94,0.06,BENIGN,0.98
+PortScan,,0,1.0,0.0,BENIGN,1.0
+PortScan,,0,0.94,0.06,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.94,0.06,BENIGN,0.96
+PortScan,,0,0.96,0.04,BENIGN,0.94
+PortScan,,0,0.96,0.04,BENIGN,0.92
+PortScan,,0,1.0,0.0,BENIGN,1.0
+PortScan,,0,0.94,0.06,BENIGN,0.96
+PortScan,,0,0.98,0.02,BENIGN,0.86
+PortScan,,0,0.9,0.1,BENIGN,0.9
+PortScan,,0,0.98,0.02,BENIGN,0.9
+PortScan,,0,0.94,0.06,BENIGN,0.96
+PortScan,,0,0.96,0.04,BENIGN,0.96
+PortScan,,0,0.94,0.06,BENIGN,0.86
+PortScan,,0,0.96,0.04,BENIGN,1.0
+PortScan,,0,0.92,0.08,BENIGN,0.9
+PortScan,,0,0.92,0.08,BENIGN,0.88
+PortScan,,0,1.0,0.0,BENIGN,0.98
+PortScan,,0,0.98,0.02,BENIGN,0.92
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.86
+PortScan,,0,1.0,0.0,BENIGN,0.96
+PortScan,,0,0.98,0.02,BENIGN,0.94
+PortScan,,0,0.98,0.02,BENIGN,0.98
+PortScan,,0,1.0,0.0,BENIGN,0.98
+PortScan,,0,1.0,0.0,BENIGN,0.98
+PortScan,,0,0.94,0.06,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.96,0.04,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.98
+PortScan,,0,0.96,0.04,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.92
+PortScan,,0,0.98,0.02,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.94
+PortScan,,0,0.52,0.48,BENIGN,0.5
+PortScan,,0,0.94,0.06,BENIGN,0.98
+PortScan,,0,0.98,0.02,BENIGN,0.9
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.94,0.06,BENIGN,0.86
+PortScan,,0,0.94,0.06,BENIGN,0.94
+PortScan,,0,1.0,0.0,BENIGN,0.98
+PortScan,,0,0.94,0.06,BENIGN,0.88
+PortScan,,0,0.94,0.06,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.98
+PortScan,,0,0.96,0.04,BENIGN,0.9
+PortScan,,0,0.94,0.06,BENIGN,0.92
+PortScan,,0,0.92,0.08,BENIGN,0.92
+PortScan,,0,0.9,0.1,BENIGN,0.88
+PortScan,,0,0.96,0.04,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.96
+PortScan,,0,0.94,0.06,BENIGN,0.98
+PortScan,,0,0.92,0.08,BENIGN,0.86
+PortScan,,0,0.96,0.04,BENIGN,0.98
+PortScan,,0,0.96,0.04,BENIGN,0.88
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,1.0,0.0,BENIGN,0.94
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.98,0.02,BENIGN,0.88
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.96,0.04,BENIGN,1.0
+PortScan,,0,0.94,0.06,BENIGN,0.9
+PortScan,,0,0.94,0.06,BENIGN,0.86
+PortScan,,0,0.9,0.1,BENIGN,0.86
+PortScan,,0,0.98,0.02,BENIGN,0.84
+PortScan,,0,0.94,0.06,BENIGN,0.84
+PortScan,,0,0.96,0.04,BENIGN,0.9
+PortScan,,0,1.0,0.0,BENIGN,0.94
+PortScan,,0,0.98,0.02,BENIGN,1.0
+PortScan,,0,1.0,0.0,BENIGN,0.98
+SSH-Patator,,1,0.78,0.78,Web Attack  Brute Force,0.52
+SSH-Patator,,1,0.78,0.78,Web Attack  Brute Force,0.48
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.42
+SSH-Patator,,1,0.86,0.86,Web Attack  Brute Force,0.42
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.94,0.06,BENIGN,0.84
+SSH-Patator,,0,0.96,0.04,BENIGN,0.8
+SSH-Patator,,1,0.86,0.86,Web Attack  Brute Force,0.48
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.8,0.2,BENIGN,0.84
+SSH-Patator,,0,0.94,0.06,BENIGN,0.84
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.42
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,1,0.9,0.9,PortScan,0.4
+SSH-Patator,,1,0.78,0.78,Web Attack  Brute Force,0.5
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.44
+SSH-Patator,,1,0.64,0.64,Web Attack  Brute Force,0.5
+SSH-Patator,,1,0.8,0.8,Web Attack  Brute Force,0.48
+SSH-Patator,,1,0.78,0.78,Web Attack  Brute Force,0.5
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.5
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.36
+SSH-Patator,,0,0.96,0.04,BENIGN,0.84
+SSH-Patator,,1,0.92,0.92,Web Attack  Brute Force,0.38
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,1,0.9,0.9,Web Attack  Brute Force,0.48
+SSH-Patator,,1,0.78,0.78,Web Attack  Brute Force,0.52
+SSH-Patator,,1,0.9,0.9,Web Attack  Brute Force,0.34
+SSH-Patator,,1,0.64,0.64,Web Attack  Brute Force,0.5
+SSH-Patator,,0,0.98,0.02,BENIGN,0.94
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.36
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.38
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,1,0.8,0.8,Web Attack  Brute Force,0.48
+SSH-Patator,,0,0.8,0.2,BENIGN,0.88
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.88
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.4
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,0,1.0,0.0,BENIGN,0.98
+SSH-Patator,,1,0.54,0.54,BENIGN,0.44
+SSH-Patator,,1,0.84,0.84,Web Attack  Brute Force,0.42
+SSH-Patator,,0,0.96,0.04,BENIGN,0.8
+SSH-Patator,,1,0.62,0.62,Web Attack  Brute Force,0.46
+SSH-Patator,,0,0.96,0.04,BENIGN,0.84
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.42
+SSH-Patator,,1,0.76,0.76,Web Attack  Brute Force,0.52
+SSH-Patator,,1,0.64,0.64,Web Attack  Brute Force,0.52
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,1,0.86,0.86,DoS slowloris,0.32
+SSH-Patator,,1,0.78,0.78,Web Attack  Brute Force,0.48
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.5
+SSH-Patator,,0,0.94,0.06,BENIGN,0.88
+SSH-Patator,,0,0.96,0.04,BENIGN,0.84
+SSH-Patator,,0,0.96,0.04,BENIGN,0.88
+SSH-Patator,,0,0.96,0.04,BENIGN,0.88
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.36
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.38
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.46
+SSH-Patator,,0,0.96,0.04,BENIGN,0.84
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.5
+SSH-Patator,,0,0.96,0.04,BENIGN,0.88
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.46
+SSH-Patator,,0,0.96,0.04,BENIGN,0.88
+SSH-Patator,,1,0.86,0.86,Web Attack  Brute Force,0.48
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.42
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.88
+SSH-Patator,,1,0.66,0.66,Web Attack  Brute Force,0.52
+SSH-Patator,,0,0.96,0.04,BENIGN,0.8
+SSH-Patator,,1,0.84,0.84,Web Attack  Brute Force,0.36
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,1,0.66,0.66,Web Attack  Brute Force,0.5
+SSH-Patator,,1,0.86,0.86,Web Attack  Brute Force,0.46
+SSH-Patator,,1,0.8,0.8,Web Attack  Brute Force,0.34
+SSH-Patator,,1,0.9,0.9,Web Attack  Brute Force,0.36
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.48
+SSH-Patator,,0,0.96,0.04,BENIGN,0.82
+SSH-Patator,,0,0.96,0.04,BENIGN,0.84
+SSH-Patator,,1,0.82,0.82,Web Attack  Brute Force,0.38
+SSH-Patator,,0,0.96,0.04,BENIGN,0.86
+SSH-Patator,,1,0.78,0.78,Web Attack  Brute Force,0.5
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.46
+SSH-Patator,,1,0.92,0.92,Web Attack  Brute Force,0.4
+SSH-Patator,,0,0.96,0.04,BENIGN,0.84
+SSH-Patator,,0,0.96,0.04,BENIGN,0.8
+SSH-Patator,,1,0.56,0.56,BENIGN,0.54
+SSH-Patator,,1,0.88,0.88,Web Attack  Brute Force,0.3
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.66,0.66,BENIGN,0.4
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.96
+Web Attack  Brute Force,,0,0.78,0.22,BENIGN,0.54
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.98
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.92
+Web Attack  Brute Force,,0,0.7,0.3,BENIGN,0.72
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.86
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.58,0.58,DoS slowloris,0.46
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,0.72,0.72,Web Attack  XSS,0.76
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,0.98
+Web Attack  Brute Force,,0,0.56,0.44,BENIGN,0.64
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.88
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.88
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  Sql Injection,0.24
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.78,0.78,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,0.92
+Web Attack  Brute Force,,0,0.5,0.5,BENIGN,0.58
+Web Attack  Brute Force,,1,0.86,0.86,Web Attack  XSS,0.88
+Web Attack  Brute Force,,0,0.56,0.44,BENIGN,0.58
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.86
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.9
+Web Attack  Brute Force,,0,0.56,0.44,BENIGN,0.64
+Web Attack  Brute Force,,0,0.56,0.44,BENIGN,0.64
+Web Attack  Brute Force,,1,0.86,0.86,Web Attack  XSS,0.84
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.88
+Web Attack  Brute Force,,1,0.86,0.86,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.94
+Web Attack  Brute Force,,0,0.56,0.44,BENIGN,0.58
+Web Attack  Brute Force,,1,0.98,0.98,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,0.54,0.54,BENIGN,0.62
+Web Attack  Brute Force,,1,0.54,0.54,BENIGN,0.44
+Web Attack  Brute Force,,1,0.9,0.9,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.98,0.98,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.84
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,0.98
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.58,0.58,BENIGN,0.44
+Web Attack  Brute Force,,1,0.78,0.78,Web Attack  XSS,0.88
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.84
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.84
+Web Attack  Brute Force,,1,0.98,0.98,Web Attack  XSS,0.98
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.74,0.74,Web Attack  XSS,0.82
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.88
+Web Attack  Brute Force,,1,0.9,0.9,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.88,0.88,Web Attack  XSS,0.88
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.86
+Web Attack  Brute Force,,1,0.9,0.9,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,0.9,0.9,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.96,0.96,DoS slowloris,0.38
+Web Attack  Brute Force,,1,0.56,0.56,BENIGN,0.6
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,1,0.9,0.9,Web Attack  XSS,0.92
+Web Attack  Brute Force,,1,0.94,0.94,Web Attack  XSS,0.96
+Web Attack  Brute Force,,1,0.92,0.92,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.84,0.84,Web Attack  XSS,0.82
+Web Attack  Brute Force,,1,0.82,0.82,Web Attack  XSS,0.88
+Web Attack  Brute Force,,1,1.0,1.0,Web Attack  XSS,1.0
+Web Attack  Brute Force,,0,0.5,0.5,BENIGN,0.6
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.94
+Web Attack  Brute Force,,1,0.96,0.96,Web Attack  XSS,0.82
+Web Attack  Brute Force,,1,0.9,0.9,Web Attack  XSS,0.9
+Web Attack  Brute Force,,1,0.64,0.64,BENIGN,0.52
+Web Attack  Brute Force,,1,0.86,0.86,Web Attack  Sql Injection,0.38
+Web Attack  Brute Force,,0,0.7,0.3,BENIGN,0.68
+Web Attack  Brute Force,,1,0.82,0.82,Web Attack  XSS,0.84
+Web Attack  Brute Force,,1,0.98,0.98,Web Attack  XSS,0.96
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.96,0.96,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.94
+Web Attack  XSS,,1,0.58,0.58,DoS Hulk,0.52
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.96
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.84
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,1.0
+Web Attack  XSS,,0,0.52,0.48,BENIGN,0.54
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.92
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.88,0.88,Web Attack  Brute Force,0.44
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.96
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.58,0.58,BENIGN,0.54
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.88,0.88,Web Attack  Brute Force,0.9
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.94
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.86,0.86,Web Attack  Brute Force,0.8
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.86,0.86,Web Attack  Brute Force,0.68
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.94
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.92
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.96,0.96,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.9,0.9,Web Attack  Brute Force,0.52
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.92
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.88,0.88,Web Attack  Brute Force,0.86
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.9
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.94,0.94,Web Attack  Brute Force,0.88
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.96
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,0.54,0.54,BENIGN,0.5
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.9
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,0,0.52,0.48,BENIGN,0.62
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.96
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.96
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.88
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.92
+Web Attack  XSS,,1,0.98,0.98,Web Attack  Brute Force,0.92
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.98
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,0.92
+Web Attack  XSS,,1,1.0,1.0,Web Attack  Brute Force,1.0

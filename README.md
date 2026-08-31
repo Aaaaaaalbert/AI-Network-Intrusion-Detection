@@ -8,6 +8,7 @@
 - Milestone 2（2026-08-14 ～ 08-17）：支援多 CSV 合併、處理真實 CIC-IDS2017 編碼問題、建立基準模型、按日期切分驗證
 - Milestone 3（2026-08-26 ～ 08-27）：多類別攻擊分類模型、預測信心分數、正式校準分析（ECE / Brier / Log Loss）
 - Milestone 4（2026-08-27）：預測 API、真實流量重播與模型監控介面
+- Milestone 5（2026-08-28）：留一攻擊類型泛化測試，檢查模型面對訓練時完全未見攻擊的行為
 
 完整的逐日紀錄（含每一步在解決什麼問題、學到什麼）見 [`docs/progress_log.md`](docs/progress_log.md)。
 
@@ -37,6 +38,14 @@ python -m src.train_baseline --processed-dir dataset/processed_by_day --model ra
 這個切分用來檢查隨機逐列切分是否因相似流量同時進入訓練與測試集，而高估模型表現。`source_file` 只保留供驗證與錯誤分析，不會成為模型輸入。
 
 實際驗證結果與限制整理在 [`results/split_validation_report.md`](results/split_validation_report.md)。跨日期測試 Recall 為 7.93%，顯示監督式模型對星期五未見攻擊類型的泛化能力不足。
+
+進一步執行「每次完整移除一種攻擊再重新訓練」的泛化測試：
+
+```powershell
+python -m src.leave_one_attack_out
+```
+
+11 種樣本數足夠的攻擊，在相同抽樣與模型設定下，「看過該攻擊」的二元 Recall 等權平均為 99.80%，完整移除後降為 58.34%，平均下降 41.46 個百分點。Bot 從 99.23% 降到 0%、PortScan 從 99.99% 降到 0.34%，而且大多是高信心漏報；完整結果與實驗限制見 [`results/leave_one_attack_out/report.md`](results/leave_one_attack_out/report.md)。這是泛化稽核，不代表模型已經具備 `UNKNOWN` 未知攻擊輸出。
 
 預設會辨識 `Label` 或 `label` 作為目標欄位，將 `BENIGN`、`NORMAL`、`0` 視為正常，其餘標籤視為攻擊。輸出包括：
 
