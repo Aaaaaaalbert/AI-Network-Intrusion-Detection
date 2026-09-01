@@ -1,0 +1,19 @@
+{
+  "model": "random_forest",
+  "train_rows": 2127300,
+  "test_rows": 703240,
+  "accuracy": 0.6216369944826802,
+  "precision": 0.9964790262986307,
+  "recall": 0.07934293912218826,
+  "confusion_matrix": [
+    [
+      414236,
+      81
+    ],
+    [
+      265999,
+      22924
+    ]
+  ],
+  "majority_class_baseline_accuracy": 0.5891544849553495
+}

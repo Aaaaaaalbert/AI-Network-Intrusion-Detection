@@ -1,0 +1,15 @@
+label,total,missed_fn,recall_percent
+DoS Hulk,46067,89,99.81
+PortScan,31789,4,99.99
+DDoS,25732,12,99.95
+DoS GoldenEye,2088,6,99.71
+FTP-Patator,1598,1,99.94
+SSH-Patator,1191,4,99.66
+DoS slowloris,1146,2,99.83
+DoS Slowhttptest,1081,2,99.81
+Bot,392,27,93.11
+Web Attack  Brute Force,308,2,99.35
+Web Attack  XSS,120,3,97.5
+Infiltration,9,0,100.0
+Heartbleed,4,0,100.0
+Web Attack  Sql Injection,4,2,50.0

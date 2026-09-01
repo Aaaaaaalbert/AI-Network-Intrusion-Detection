@@ -1,0 +1,25 @@
+{
+  "model": "random_forest",
+  "target": "is_attack",
+  "train_rows": 2264432,
+  "test_rows": 566108,
+  "accuracy": 0.9995760526260007,
+  "precision": 0.9992284296749536,
+  "recall": 0.9986191932143209,
+  "confusion_matrix": [
+    [
+      454493,
+      86
+    ],
+    [
+      154,
+      111375
+    ]
+  ],
+  "majority_class_baseline_accuracy": 0.8029898888551301,
+  "confidence": {
+    "mean_confidence_overall": 0.9991607961731684,
+    "mean_confidence_when_correct": 0.9992816699300899,
+    "mean_confidence_when_wrong": 0.7141666666666667
+  }
+}

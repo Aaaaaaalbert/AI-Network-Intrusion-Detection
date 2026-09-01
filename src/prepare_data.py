@@ -19,6 +19,47 @@ from src.column_utils import clean_column_names
 
 NORMAL_LABELS = {"0", "benign", "normal", "normal."}
 
+# Identifier/metadata columns that are unique (or near-unique) per row.
+# One-hot encoding them would explode into millions of useless columns and
+# they would not generalize to traffic never seen during training anyway.
+NON_FEATURE_COLUMNS = {
+    "flow_id",
+    "source_ip",
+    "destination_ip",
+    "timestamp",
+    "source_file",
+}
+
+
+def read_csv_file(path: Path) -> pd.DataFrame:
+    """Read one CSV and report its path when loading fails."""
+    try:
+        return pd.read_csv(path, encoding="latin1")
+    except Exception as exc:
+        raise ValueError(f"讀取 CSV 失敗：{path}（{exc}）") from exc
+
+
+def load_csv_directory(input_dir: Path) -> pd.DataFrame:
+    """Recursively load CSV files and retain each row's source filename."""
+    if not input_dir.exists():
+        raise FileNotFoundError(f"輸入資料夾不存在：{input_dir}")
+    if not input_dir.is_dir():
+        raise NotADirectoryError(f"輸入路徑不是資料夾：{input_dir}")
+
+    csv_files = sorted(
+        (path for path in input_dir.rglob("*") if path.is_file() and path.suffix.lower() == ".csv"),
+        key=lambda path: path.relative_to(input_dir).as_posix().casefold(),
+    )
+    if not csv_files:
+        raise FileNotFoundError(f"輸入資料夾內找不到 CSV：{input_dir}")
+
+    frames = []
+    for path in csv_files:
+        frame = read_csv_file(path)
+        frame["source_file"] = path.relative_to(input_dir).as_posix()
+        frames.append(frame)
+    return pd.concat(frames, ignore_index=True)
+
 
 def clean_data(frame: pd.DataFrame, label_column: str = "label") -> pd.DataFrame:
     """Clean a raw flow table and add binary ``is_attack`` labels."""
@@ -28,7 +69,10 @@ def clean_data(frame: pd.DataFrame, label_column: str = "label") -> pd.DataFrame
     if label_column not in data.columns:
         raise ValueError(f"找不到標籤欄位：{label_column}")
 
-    data = data.drop_duplicates().reset_index(drop=True)
+    # Provenance is not part of a flow. Ignoring it here prevents an identical
+    # row in two files from leaking across a file-based train/test boundary.
+    duplicate_subset = [column for column in data.columns if column != "source_file"]
+    data = data.drop_duplicates(subset=duplicate_subset).reset_index(drop=True)
     data = data.replace([np.inf, -np.inf], np.nan)
     data = data.dropna(subset=[label_column])
     labels = data[label_column].astype(str).str.strip()
@@ -37,12 +81,25 @@ def clean_data(frame: pd.DataFrame, label_column: str = "label") -> pd.DataFrame
     return data
 
 
+MAX_CATEGORICAL_CARDINALITY = 100
+
+
 def build_preprocessor(features: pd.DataFrame) -> ColumnTransformer:
     """Build numeric and categorical transformations for a feature table."""
     numeric = features.select_dtypes(include=["number", "bool"]).columns.tolist()
     categorical = [column for column in features.columns if column not in numeric]
     if not numeric and not categorical:
         raise ValueError("資料中沒有可用的特徵欄位")
+
+    high_cardinality = [
+        column for column in categorical
+        if features[column].nunique(dropna=True) > MAX_CATEGORICAL_CARDINALITY
+    ]
+    if high_cardinality:
+        raise ValueError(
+            "以下欄位類別數過多，one-hot encoding 會爆炸式增加欄位、耗盡記憶體，"
+            f"請在前處理階段排除這些欄位：{high_cardinality}"
+        )
 
     transformers = []
     if numeric:
@@ -58,28 +115,96 @@ def build_preprocessor(features: pd.DataFrame) -> ColumnTransformer:
     return ColumnTransformer(transformers, verbose_feature_names_out=False)
 
 
+def split_temporal_per_class(
+    data: pd.DataFrame, label_column: str, test_size: float
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Split each label's own rows chronologically (early -> train, late -> test).
+
+    Splitting whole days (by-file) leaves multi-class labels that only occur
+    on one day (e.g. Heartbleed) with zero training or zero test examples.
+    Splitting within each label's own timeline keeps every label in both
+    sets while still holding out its most recent traffic.
+    """
+    if "timestamp" not in data.columns:
+        raise ValueError("依類別時間切分需要 timestamp 欄位")
+
+    # format="mixed": CIC-IDS2017 mixes "D/M/YYYY H:MM" (no seconds) with
+    # "DD/MM/YYYY HH:MM:SS" across files; a single inferred format silently
+    # turns the other variant into NaT.
+    parsed_time = pd.to_datetime(
+        data["timestamp"], dayfirst=True, format="mixed", errors="coerce"
+    )
+    if parsed_time.isna().any():
+        raise ValueError("timestamp 欄位有無法解析的值，無法依時間切分")
+
+    train_parts, test_parts = [], []
+    for _, group in data.groupby(label_column):
+        ordered_index = parsed_time.loc[group.index].sort_values(kind="stable").index
+        ordered_group = group.loc[ordered_index]
+
+        n = len(ordered_group)
+        if n < 2:
+            # Too few rows to hold any out; keep them for training only.
+            train_parts.append(ordered_group)
+            continue
+
+        split_idx = min(n - 1, max(1, round(n * (1 - test_size))))
+        train_parts.append(ordered_group.iloc[:split_idx])
+        test_parts.append(ordered_group.iloc[split_idx:])
+
+    train = pd.concat(train_parts).sort_index()
+    test = pd.concat(test_parts).sort_index() if test_parts else data.iloc[0:0]
+    return train, test
+
+
 def prepare_dataset(
     frame: pd.DataFrame,
     output_dir: Path,
     label_column: str = "label",
     test_size: float = 0.2,
     random_state: int = 42,
+    split_strategy: str = "random",
+    test_file_prefix: str = "Friday",
 ) -> dict[str, object]:
     """Clean, split and transform data, then persist reproducible artifacts."""
     data = clean_data(frame, label_column)
     label_column = clean_column_names([label_column])[0]
-    feature_columns = [c for c in data.columns if c not in {label_column, "is_attack"}]
+    excluded_columns = {label_column, "is_attack"} | NON_FEATURE_COLUMNS
+    feature_columns = [c for c in data.columns if c not in excluded_columns]
     if not feature_columns:
         raise ValueError("移除標籤後沒有可用的特徵")
     if data["is_attack"].nunique() < 2:
         raise ValueError("資料必須同時包含正常與攻擊流量")
 
-    train, test = train_test_split(
-        data,
-        test_size=test_size,
-        random_state=random_state,
-        stratify=data["is_attack"],
-    )
+    if split_strategy == "random":
+        train, test = train_test_split(
+            data,
+            test_size=test_size,
+            random_state=random_state,
+            stratify=data["is_attack"],
+        )
+    elif split_strategy == "by-file":
+        if "source_file" not in data.columns:
+            raise ValueError("依檔案切分需要 source_file；請使用 --input-dir 載入資料")
+        test_mask = data["source_file"].str.casefold().str.startswith(
+            test_file_prefix.casefold()
+        )
+        train = data.loc[~test_mask]
+        test = data.loc[test_mask]
+        if train.empty or test.empty:
+            raise ValueError(
+                f"依檔案切分失敗：前綴 {test_file_prefix!r} 必須同時留下訓練與測試資料"
+            )
+        if train["is_attack"].nunique() < 2 or test["is_attack"].nunique() < 2:
+            raise ValueError("依檔案切分後，訓練集與測試集都必須包含正常及攻擊流量")
+    elif split_strategy == "temporal-per-class":
+        train, test = split_temporal_per_class(data, label_column, test_size)
+        if train.empty or test.empty:
+            raise ValueError("依類別時間切分失敗：訓練集或測試集為空")
+        if train["is_attack"].nunique() < 2 or test["is_attack"].nunique() < 2:
+            raise ValueError("依類別時間切分後，訓練集與測試集都必須包含正常及攻擊流量")
+    else:
+        raise ValueError(f"不支援的切分策略：{split_strategy}")
     preprocessor = build_preprocessor(train[feature_columns])
     train_values = preprocessor.fit_transform(train[feature_columns])
     test_values = preprocessor.transform(test[feature_columns])
@@ -89,6 +214,11 @@ def prepare_dataset(
     train_output[[label_column, "is_attack"]] = train[[label_column, "is_attack"]].reset_index(drop=True)
     test_output = pd.DataFrame(test_values, columns=transformed_columns)
     test_output[[label_column, "is_attack"]] = test[[label_column, "is_attack"]].reset_index(drop=True)
+
+    # Retain provenance for audit/error analysis, but never use it as a feature.
+    if "source_file" in data.columns:
+        train_output["source_file"] = train["source_file"].reset_index(drop=True)
+        test_output["source_file"] = test["source_file"].reset_index(drop=True)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     train_output.to_csv(output_dir / "train.csv", index=False)
@@ -106,6 +236,12 @@ def prepare_dataset(
             str(key): int(value) for key, value in data[label_column].value_counts().items()
         },
         "random_state": random_state,
+        "split_strategy": split_strategy,
+        "test_file_prefix": test_file_prefix if split_strategy == "by-file" else None,
+        "train_source_files": sorted(train["source_file"].unique().tolist())
+        if "source_file" in train.columns else [],
+        "test_source_files": sorted(test["source_file"].unique().tolist())
+        if "source_file" in test.columns else [],
     }
     (output_dir / "metadata.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -127,18 +263,48 @@ def demo_data(rows: int = 200, random_state: int = 42) -> pd.DataFrame:
     })
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
+    """Build the command-line parser."""
     parser = argparse.ArgumentParser(description="準備網路入侵偵測資料")
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--input", type=Path, help="原始 CSV 路徑")
+    source.add_argument("--input-dir", type=Path, help="遞迴讀取資料夾內所有 CSV")
     source.add_argument("--demo", action="store_true", help="使用內建示範資料")
     parser.add_argument("--output-dir", type=Path, default=Path("data/processed"))
     parser.add_argument("--label-column", default="label")
     parser.add_argument("--test-size", type=float, default=0.2)
-    args = parser.parse_args()
+    parser.add_argument(
+        "--split-strategy",
+        choices=("random", "by-file", "temporal-per-class"),
+        default="random",
+        help="random=隨機分層切分；by-file=依來源檔案前綴切分；"
+        "temporal-per-class=每個類別各自依時間切分",
+    )
+    parser.add_argument(
+        "--test-file-prefix",
+        default="Friday",
+        help="by-file 模式中保留為測試集的檔名前綴",
+    )
+    return parser
 
-    frame = demo_data() if args.demo else pd.read_csv(args.input)
-    metadata = prepare_dataset(frame, args.output_dir, args.label_column, args.test_size)
+
+def main() -> None:
+    args = build_parser().parse_args()
+
+    if args.demo:
+        frame = demo_data()
+    elif args.input_dir is not None:
+        frame = load_csv_directory(args.input_dir)
+    else:
+        frame = read_csv_file(args.input)
+    metadata = prepare_dataset(
+        frame,
+        args.output_dir,
+        args.label_column,
+        args.test_size,
+        split_strategy=args.split_strategy,
+        test_file_prefix=args.test_file_prefix,
+    )
     print(f"完成：{metadata['train_rows']} 筆訓練資料、{metadata['test_rows']} 筆測試資料")
     print(f"輸出位置：{args.output_dir.resolve()}")
 
