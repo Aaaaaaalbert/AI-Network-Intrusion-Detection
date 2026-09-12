@@ -1,0 +1,16 @@
+{
+  "accuracy": 0.976182905674909,
+  "macro_precision": 0.8668077236608429,
+  "macro_recall": 0.7897800783369919,
+  "macro_f1": 0.7880232987074247,
+  "split": "Temporal",
+  "feature_set": "Minus_Port",
+  "seed": 44,
+  "train_rows": 2264434,
+  "test_rows": 566106,
+  "dropped_columns": [
+    "source_port",
+    "destination_port"
+  ],
+  "fit_seconds": 299.8
+}
