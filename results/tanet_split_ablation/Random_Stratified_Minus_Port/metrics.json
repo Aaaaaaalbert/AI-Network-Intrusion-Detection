@@ -1,0 +1,15 @@
+{
+  "split": "Random_Stratified",
+  "feature_set": "Minus_Port",
+  "accuracy": 0.9986115723501523,
+  "macro_precision": 0.8995904131146869,
+  "macro_recall": 0.8415686267903484,
+  "macro_f1": 0.8612304796850734,
+  "train_rows": 2264432,
+  "test_rows": 566108,
+  "reused_existing_model": false,
+  "dropped_columns": [
+    "source_port",
+    "destination_port"
+  ]
+}

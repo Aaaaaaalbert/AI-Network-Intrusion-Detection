@@ -1,0 +1,6 @@
+{
+  "iterations": 10000,
+  "seed": 42,
+  "method": "paired multinomial cell bootstrap",
+  "captures": "test-set sampling variability only; not training randomness"
+}

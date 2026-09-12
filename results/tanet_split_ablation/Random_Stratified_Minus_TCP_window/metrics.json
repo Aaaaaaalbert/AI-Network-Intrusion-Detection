@@ -1,0 +1,15 @@
+{
+  "split": "Random_Stratified",
+  "feature_set": "Minus_TCP_window",
+  "accuracy": 0.9986062730079773,
+  "macro_precision": 0.9681659129982696,
+  "macro_recall": 0.8817371767138166,
+  "macro_f1": 0.9054696336959046,
+  "train_rows": 2264432,
+  "test_rows": 566108,
+  "reused_existing_model": false,
+  "dropped_columns": [
+    "init_win_bytes_forward",
+    "init_win_bytes_backward"
+  ]
+}

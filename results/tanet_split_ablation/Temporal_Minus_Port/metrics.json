@@ -1,0 +1,15 @@
+{
+  "split": "Temporal",
+  "feature_set": "Minus_Port",
+  "accuracy": 0.9736604098879008,
+  "macro_precision": 0.8627170838949563,
+  "macro_recall": 0.7969483235261169,
+  "macro_f1": 0.7910863731689816,
+  "train_rows": 2264434,
+  "test_rows": 566106,
+  "reused_existing_model": false,
+  "dropped_columns": [
+    "source_port",
+    "destination_port"
+  ]
+}

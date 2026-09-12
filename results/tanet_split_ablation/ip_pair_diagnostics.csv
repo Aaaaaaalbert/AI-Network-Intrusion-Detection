@@ -1,0 +1,16 @@
+label,support,missing_ip_rows,directed_ip_pairs,undirected_ip_pairs,major_pair_rows,major_pair_fraction,five_tuple_groups
+BENIGN,2272895,0,113764,61978,294075,0.1293834515012792,1241767
+Bot,1966,0,12,7,580,0.2950152594099695,1933
+DDoS,128027,0,2,1,128027,1.0,45395
+DoS GoldenEye,10293,0,1,1,10293,1.0,7458
+DoS Hulk,231072,0,1,1,231072,1.0,14108
+DoS Slowhttptest,5499,0,1,1,5499,1.0,4216
+DoS slowloris,5796,0,1,1,5796,1.0,3873
+FTP-Patator,7938,0,1,1,7938,1.0,3991
+Heartbleed,11,0,1,1,11,1.0,1
+Infiltration,36,0,1,1,36,1.0,6
+PortScan,158930,0,1,1,158930,1.0,158676
+SSH-Patator,5897,0,1,1,5897,1.0,2979
+Web Attack  Brute Force,1507,0,1,1,1507,1.0,1363
+Web Attack  Sql Injection,21,0,1,1,21,1.0,12
+Web Attack  XSS,652,0,1,1,652,1.0,631
