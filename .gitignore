@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
+.tmp/
 
 # Local / temporary files
 .claude/
@@ -27,3 +28,12 @@ models/**/*.joblib
 # EDA outputs
 results/eda/*
 !results/eda/.gitkeep
+
+# Unpublished paper drafts and research material
+docs/TAAI*
+docs/TANET*
+docs/tanet_*
+docs/admissions/
+results/tanet_split_ablation/
+results/seed_robustness/
+results/split_comparison.md
