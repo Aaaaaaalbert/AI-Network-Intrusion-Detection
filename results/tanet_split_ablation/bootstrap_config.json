@@ -1,6 +1,14 @@
 {
   "iterations": 10000,
   "seed": 42,
-  "method": "paired multinomial cell bootstrap",
-  "captures": "test-set sampling variability only; not training randomness"
+  "within_split": "paired multinomial over shared-test-set outcome cells",
+  "across_split": "joint multinomial over the union of both test sets, preserving the shared rows",
+  "union_rows": 1019138,
+  "overlapping_rows": 113076,
+  "signature_cells": 365,
+  "not_covered": [
+    "same-scenario flow correlation",
+    "training randomness",
+    "resampling of the split itself"
+  ]
 }

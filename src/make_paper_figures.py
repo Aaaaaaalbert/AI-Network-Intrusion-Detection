@@ -65,7 +65,7 @@ def figure_interaction(ci, path):
     ax.set_xticks(xs, [SPLIT_LABEL[s] for s in SPLIT_LABEL])
     ax.set_xlim(-0.4, 1.55)
     ax.set_ylabel('Macro F1 相對全特徵的變化（百分點）')
-    inter = pick(ci, 'interaction', 'Random_minus_Temporal', 'Minus_Port')
+    inter = pick(ci, 'interaction_joint', 'Random_minus_Temporal', 'Minus_Port')
     ax.set_title('圖 2　特徵消融效果隨切分策略反轉\n'
                  f'移除 Port 的切分間差異 {inter["point"] * 100:.2f} pp'
                  f'（95% CI [{inter["ci_low"] * 100:.2f}, {inter["ci_high"] * 100:.2f}]）',
