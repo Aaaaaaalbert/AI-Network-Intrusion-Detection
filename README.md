@@ -1,96 +1,59 @@
 # AI Network Intrusion Detection
 
-使用機器學習分析網路流量，判斷連線是正常流量或攻擊，並輸出攻擊類型與信心分數。
+用 CIC-IDS2017 做網路入侵偵測，Random Forest 基準模型，輸出攻擊類型與信心分數。
 
-這個專案以 CIC-IDS2017 建立 Random Forest 基準模型、預測 API 與流量重播介面，重點是檢查模型面對新日期及未見攻擊時是否仍可靠。二元分類在隨機逐列切分的 Recall 為 **99.86%**；改以星期一至四訓練、星期五測試後降為 **7.93%**。星期五也包含訓練時未見的攻擊類型，因此這個差距不能單獨解讀為資料洩漏。實驗數據、逐類別結果與限制見[切分方式驗證報告](results/split_validation_report.md)。
+做這個專案的過程中發現，模型在標準做法下的分數是假的，所以後半部大多在檢驗這件事。
 
-原始資料與訓練模型不放入 Git；取得資料的方法見[資料夾說明](dataset/raw/README.md)。
+## 結果
 
-## 專案進度
+| 設定 | Binary Recall |
+| --- | --- |
+| 隨機切分 | 99.86% |
+| 時序切分（週一–四訓練，週五測試） | 7.93% |
+| LOAO，攻擊有在訓練集 | 99.80% |
+| LOAO，該攻擊移除 | 58.34% |
 
-- Milestone 1（2026-08-11）：資料集探索分析（EDA）
-- Milestone 2（2026-08-14 ～ 08-17）：支援多 CSV 合併、處理真實 CIC-IDS2017 編碼問題、建立基準模型、按日期切分驗證
-- Milestone 3（2026-08-26 ～ 08-27）：多類別攻擊分類模型、預測信心分數、正式校準分析（ECE / Brier / Log Loss）
-- Milestone 4（2026-08-27）：預測 API、真實流量重播與模型監控介面
-- Milestone 5（2026-08-28）：留一攻擊類型泛化測試，檢查模型面對訓練時完全未見攻擊的行為
+LOAO 是 leave-one-attack-out，把某類攻擊整個抽掉不訓練再拿它測。11 種樣本夠的攻擊平衡後平均，掉了 41.46 個百分點。個別來看落差更大，Bot 從 99.23% 掉到 0，PortScan 從 99.99% 掉到 0.34%。
 
-完整的逐日紀錄（含每一步在解決什麼問題、學到什麼）見 [`docs/progress_log.md`](docs/progress_log.md)。
+用 recall 是因為入侵偵測漏抓比誤報嚴重，加上這個資料集正常流量佔絕大多數，看準確率沒意義。
 
-## 快速開始
+## 幾個觀察
 
-需要 Python 3.10 以上版本。
+隨機切分會把同一次攻擊連線的前後片段拆到訓練和測試兩邊，分數自然好看。改成用較早的日期訓練、較晚的測試之後掉到 7.93%，主要是因為週五出現了前四天沒有的攻擊類型——而這才是實際部署會遇到的情況。
 
-```powershell
-python -m pip install -r requirements.txt
-python -m src.prepare_data --demo --output-dir data/processed
-python -m unittest discover -s tests -v
+LOAO 的結果更直接：模型對沒見過的攻擊幾乎沒有辨識力。Bot 那一欄是 0，不是接近 0。
+
+比較意外的是漏抓的形態。模型不是判不出來，是**以很高的信心判成正常流量**。這代表信心分數不能直接拿來排告警的優先順序，否則最危險的那些會排在最後面。
+
+## 內容
+
+```
+src/         前處理、訓練、評估
+api/         預測 API，輸出攻擊類型、信心分數、top-3 候選
+web/         流量重播與監控介面
+results/     實驗結果與報告
+notebooks/   探索分析
+models/      模型與前處理器（太大，沒進版控）
+tests/
+dataset/     資料集取得說明
+docs/        進度紀錄
 ```
 
-處理自己的 CSV：
+詳細結果：
+- [切分方式驗證](results/split_validation_report.md)
+- [LOAO 完整結果](results/leave_one_attack_out/report.md)
+- [開發歷程](docs/progress_log.md)
 
-```powershell
-python -m src.prepare_data --input data/raw/network_traffic.csv --output-dir data/processed
-```
+## 執行
 
-以星期一至四訓練、星期五測試，進行較嚴格的跨日期驗證：
+Python 3.10+，`pip install -r requirements.txt`。
 
-```powershell
-python -m src.prepare_data --input-dir dataset/raw --output-dir dataset/processed_by_day --split-strategy by-file --test-file-prefix Friday
-python -m src.train_baseline --processed-dir dataset/processed_by_day --model random_forest --model-dir models/by_day --results-dir results/by_day
-```
+資料集沒有放進 repo，CIC-IDS2017 要自己去 UNB 官網下載，路徑設定見 [dataset/raw/README.md](dataset/raw/README.md)。
 
-這個切分用來檢查隨機逐列切分是否因相似流量同時進入訓練與測試集，而高估模型表現。`source_file` 只保留供驗證與錯誤分析，不會成為模型輸入。
+## 還沒做的
 
-實際驗證結果與限制整理在 [`results/split_validation_report.md`](results/split_validation_report.md)。跨日期測試 Recall 為 7.93%，顯示監督式模型對星期五未見攻擊類型的泛化能力不足。
+只有 Random Forest，沒有跟深度學習方法做系統性比較。LOAO 只涵蓋樣本數夠的 11 種攻擊，樣本太少的那幾類沒測。所有結論都建立在 CIC-IDS2017 這一個資料集上，沒有在別的資料集驗證過。
 
-進一步執行「每次完整移除一種攻擊再重新訓練」的泛化測試：
+## License
 
-```powershell
-python -m src.leave_one_attack_out
-```
-
-11 種樣本數足夠的攻擊，在相同抽樣與模型設定下，「看過該攻擊」的二元 Recall 等權平均為 99.80%，完整移除後降為 58.34%，平均下降 41.46 個百分點。Bot 從 99.23% 降到 0%、PortScan 從 99.99% 降到 0.34%，而且大多是高信心漏報；完整結果與實驗限制見 [`results/leave_one_attack_out/report.md`](results/leave_one_attack_out/report.md)。這是泛化稽核，不代表模型已經具備 `UNKNOWN` 未知攻擊輸出。
-
-預設會辨識 `Label` 或 `label` 作為目標欄位，將 `BENIGN`、`NORMAL`、`0` 視為正常，其餘標籤視為攻擊。輸出包括：
-
-- `train.csv`：模型訓練資料
-- `test.csv`：保留的測試資料
-- `preprocessor.joblib`：只用訓練集擬合的資料轉換器
-- `metadata.json`：欄位、資料筆數與標籤分布
-
-## 預測 API 與監控網頁
-
-需要先產生真實資料的多類別模型（`models/multiclass_random/random_forest.joblib`）與前處理器（`dataset/processed/preprocessor.joblib`）——這兩個檔案是從真實 CIC-IDS2017 資料衍生出來的，體積較大，不納入版本控制，需要照上面「快速開始」的步驟自己跑一次 `prepare_data` + `train_baseline --target label` 產生。
-
-```powershell
-python -m pip install -r requirements.txt
-python -m uvicorn api.main:app --reload
-```
-
-啟動後開啟 http://127.0.0.1:8000 即可看到監控網頁（`web/index.html`，由 API 直接掛載提供）；API 本身另外提供：
-
-- `GET /health`：健康檢查
-- `GET /model-info`：模型、隨機／時間／跨日期驗證與校準摘要
-- `GET /samples`：97 筆平衡的真實測試流量，包含各類別的正確與錯誤案例
-- `POST /predict`：輸入一筆原始尺度流量的 80 個特徵值，回傳攻擊類型、信心與前三名候選
-
-網頁定位為「CIC-IDS2017 威脅流量重播實驗室」，不是正式即時監控。可依場景重播、暫停或逐筆分析真實標記流量，並同步更新攻擊趨勢、偵測分布、事件紀錄與高風險漏報。資料集 Ground Truth 只在評估模式中顯示。
-
-如需重建網頁的平衡重播樣本：
-
-```powershell
-python -m src.build_demo_samples
-```
-
-## 專案結構
-
-```text
-data/       原始與處理後資料
-models/     訓練完成的模型
-notebooks/  探索性分析
-results/    評估結果
-src/        資料處理與模型程式
-api/        預測 API
-web/        監控介面
-tests/      自動化測試
-```
+MIT
