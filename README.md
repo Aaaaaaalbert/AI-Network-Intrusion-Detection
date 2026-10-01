@@ -57,3 +57,10 @@ Python 3.10+，`pip install -r requirements.txt`。
 ## License
 
 MIT
+
+
+## 研究協作
+
+- [ghjkl563563-stack](https://github.com/ghjkl563563-stack)：參與六組消融實驗、bootstrap 分析與多 seed 實驗。
+
+上述分工依專案負責人確認列示；相關研究程式與結果尚未全部公開。
