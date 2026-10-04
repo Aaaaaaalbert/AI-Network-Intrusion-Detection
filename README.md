@@ -56,8 +56,8 @@ Python 3.10+，`pip install -r requirements.txt`。
 
 ## 研究協作
 
-- 陳冠庭（[ghjkl563563-stack](https://github.com/ghjkl563563-stack)）：依 v2 貢獻表，主導 TANET 研究的實驗與分析工具工作，包括 15 類標籤分層切分、bootstrap 信賴區間與跨切分重疊修正、多 seed 重複實驗、逐類別分析及論文圖表；另負責推進論文初稿、參考文獻查證、排版工具與投稿檢查清單。v2 記錄其中 F6–F14 使用 Claude 協助，不代表全部程式與文字均由本人手寫。
-- 六組消融的研究設計、執行框架、IP 配對診斷與結果一致性檢查（F1–F4），v2 列為陳冠庭的工作，同時註明初始作者仍待雙方確認。完整範圍與註記見[陳冠庭貢獻說明](docs/contributions.md)。
+- 陳冠庭（[ghjkl563563-stack](https://github.com/ghjkl563563-stack)）：主導 TANET 研究的實驗與分析工具工作，包括 15 類標籤分層切分、bootstrap 信賴區間與跨切分重疊修正、多 seed 重複實驗、逐類別分析及論文圖表；另負責推進論文初稿、參考文獻查證、排版工具與投稿檢查清單。其中 F6–F14 使用 Claude 協助，不代表全部程式與文字均由本人手寫。
+- 六組消融的研究設計、執行框架、IP 配對診斷與結果一致性檢查（F1–F4），由陳冠庭提出貢獻說明，初始作者仍待雙方確認。完整範圍與註記見[陳冠庭貢獻說明](docs/contributions.md)。
 - 已公開的相關程式與結果透過 [PR #2](https://github.com/Aaaaaaalbert/AI-Network-Intrusion-Detection/pull/2) 合併至 `main`，五筆研究提交均以陳冠庭署名。
 
 公開內容包含[六組消融結果](results/tanet_split_ablation/comparison.md)、[保留跨切分重疊的 bootstrap 說明](docs/bootstrap_overlap_note.md)與[多 seed 結果](results/tanet_multiseed/runs.csv)。提交署名記錄程式版本的貢獻，論文各段落與圖表的詳細分工仍由共同作者核對。
