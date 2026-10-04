@@ -33,7 +33,7 @@ results/eda/*
 docs/TAAI*
 docs/TANET*
 docs/tanet_*
+!docs/tanet_methods.md
 docs/admissions/
-results/tanet_split_ablation/
 results/seed_robustness/
 results/split_comparison.md
