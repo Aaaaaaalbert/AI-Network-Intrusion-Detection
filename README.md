@@ -54,11 +54,6 @@ Python 3.10+，`pip install -r requirements.txt`。
 
 只有 Random Forest，沒有跟深度學習方法做系統性比較。LOAO 只涵蓋樣本數夠的 11 種攻擊，樣本太少的那幾類沒測。所有結論都建立在 CIC-IDS2017 這一個資料集上，沒有在別的資料集驗證過。
 
-## License
-
-MIT
-
-
 ## 研究協作
 
 - 陳冠庭（[ghjkl563563-stack](https://github.com/ghjkl563563-stack)）：六組消融實驗、bootstrap 分析與多 seed 實驗的研究協作。相關程式與結果已透過 [PR #2](https://github.com/Aaaaaaalbert/AI-Network-Intrusion-Detection/pull/2) 合併至 `main`，五筆研究提交均以陳冠庭署名。
