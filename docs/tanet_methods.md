@@ -38,4 +38,12 @@ Heartbleed、Infiltration、SQL Injection 必須將 Recall 與測試 support 同
 
 Full、−Port、−TCP-window 的 Macro F1：Random Stratified 分別 90.7194%、86.1230%、90.5470%；Temporal 分別 74.0096%、79.1086%、74.2325%。移除 Port 在 Random 下降 4.5963 個百分點，在 Temporal 上升 5.0990 個百分點，兩種切分的消融效果差為 9.6954 個百分點。這是切分與特徵群共同影響表現的描述性證據，不是統計顯著性或因果證明。移除 TCP window 的影響分別為 −0.1724 與 +0.2229 個百分點。
 
-六組混淆矩陣與逐類 support、Accuracy 一致；資料處理與欄位測試 14 項通過。必做六組無缺漏。尚未進行多 seed 重複、信賴區間、外部資料集驗證及 optional TCP flags 消融；不屬本次必做項目。Temporal Full 重用既有模型，其餘五組全量重訓，不使用抽樣。新訓練模型未另存權重；完整預測、設定與資料指紋已保存供重算指標及重現訓練。
+六組混淆矩陣與逐類 support、Accuracy 一致；六組完成時資料處理與欄位測試 14 項通過。必做六組無缺漏。Temporal Full 重用既有模型，其餘五組全量重訓，不使用抽樣。新訓練模型未另存權重；完整預測、設定與資料指紋已保存供重算指標及重現訓練。
+
+## 2026-10-04 公開版本更新
+
+PR #2 已合併六組實驗、bootstrap 與固定切分的多 seed 結果。`src/multiseed_ablation.py` 比較兩種切分下 Full 與 Minus_Port、seed 42／43／44，結果見 `results/tanet_multiseed/runs.csv`；不是六組特徵設定全部都有多 seed 重複。
+
+以公開 Full 三個 seed 的 Macro F1 重算，Random Stratified 為 90.95% ± 0.22 個百分點，Temporal 為 73.73% ± 0.26 個百分點；配對差距為 17.23 ± 0.48 個百分點。此處 ± 為樣本標準差（ddof=1），不是信賴區間；平均值不能與其他批次的 seed 結果混用。
+
+Bootstrap 執行 10,000 次，跨切分採保留 113,076 筆共用測試列相依性的聯合重抽，見 [修正說明](bootstrap_overlap_note.md)。它仍未涵蓋同場景流量相關、訓練隨機性或切分本身的變動。外部資料集驗證與 optional TCP flags 消融仍未完成。

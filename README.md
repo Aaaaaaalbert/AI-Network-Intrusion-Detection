@@ -61,6 +61,6 @@ MIT
 
 ## 研究協作
 
-- [ghjkl563563-stack](https://github.com/ghjkl563563-stack)：參與六組消融實驗、bootstrap 分析與多 seed 實驗。
+- 陳冠庭（[ghjkl563563-stack](https://github.com/ghjkl563563-stack)）：六組消融實驗、bootstrap 分析與多 seed 實驗的研究協作。相關程式與結果已透過 [PR #2](https://github.com/Aaaaaaalbert/AI-Network-Intrusion-Detection/pull/2) 合併至 `main`，五筆研究提交均以陳冠庭署名。
 
-上述分工依專案負責人確認列示；相關研究程式與結果尚未全部公開。
+公開內容包含[六組消融結果](results/tanet_split_ablation/comparison.md)、[保留跨切分重疊的 bootstrap 說明](docs/bootstrap_overlap_note.md)與[多 seed 結果](results/tanet_multiseed/runs.csv)。提交署名記錄程式版本的貢獻，論文各段落與圖表的詳細分工仍由共同作者核對。
