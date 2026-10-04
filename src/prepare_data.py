@@ -181,7 +181,7 @@ def prepare_dataset(
             data,
             test_size=test_size,
             random_state=random_state,
-            stratify=data["is_attack"],
+            stratify=data[label_column],
         )
     elif split_strategy == "by-file":
         if "source_file" not in data.columns:
@@ -237,6 +237,7 @@ def prepare_dataset(
         },
         "random_state": random_state,
         "split_strategy": split_strategy,
+        "stratify_column": label_column if split_strategy == "random" else None,
         "test_file_prefix": test_file_prefix if split_strategy == "by-file" else None,
         "train_source_files": sorted(train["source_file"].unique().tolist())
         if "source_file" in train.columns else [],

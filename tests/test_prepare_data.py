@@ -75,6 +75,16 @@ class PrepareDataTests(unittest.TestCase):
             self.assertIn("is_attack", train.columns)
             self.assertFalse(train.isna().any().any())
 
+    def test_random_stratifies_all_fifteen_labels(self):
+        labels = ["BENIGN"] + [f"attack_{i}" for i in range(14)]
+        frame = pd.DataFrame({"feature": range(1500), "Label": [l for l in labels for _ in range(100)]})
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            metadata = prepare_dataset(frame, output)
+            held_out = pd.read_csv(output / "test.csv")
+            self.assertEqual(held_out.label.value_counts().to_dict(), {l: 20 for l in labels})
+            self.assertEqual(metadata["stratify_column"], "label")
+
     def test_prepare_dataset_can_hold_out_files_by_prefix(self):
         frame = pd.DataFrame({
             "feature": [1, 2, 3, 4, 5, 6],

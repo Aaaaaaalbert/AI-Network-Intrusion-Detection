@@ -1,0 +1,12 @@
+{
+  "split": "Random_Stratified",
+  "feature_set": "Full",
+  "accuracy": 0.9993676118337844,
+  "macro_precision": 0.9712669324686324,
+  "macro_recall": 0.8825633906345496,
+  "macro_f1": 0.9071935100263289,
+  "train_rows": 2264432,
+  "test_rows": 566108,
+  "reused_existing_model": false,
+  "dropped_columns": []
+}

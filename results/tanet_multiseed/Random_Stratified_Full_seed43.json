@@ -1,0 +1,13 @@
+{
+  "accuracy": 0.9994082401237926,
+  "macro_precision": 0.9752233557431563,
+  "macro_recall": 0.8867776019331302,
+  "macro_f1": 0.9114756277106739,
+  "split": "Random_Stratified",
+  "feature_set": "Full",
+  "seed": 43,
+  "train_rows": 2264432,
+  "test_rows": 566108,
+  "dropped_columns": [],
+  "fit_seconds": 340.3
+}

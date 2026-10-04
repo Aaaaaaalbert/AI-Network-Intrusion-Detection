@@ -1,0 +1,12 @@
+{
+  "split": "Temporal",
+  "feature_set": "Full",
+  "accuracy": 0.9751495302999792,
+  "macro_precision": 0.8280308768254785,
+  "macro_recall": 0.7491741307070499,
+  "macro_f1": 0.7400962485894559,
+  "train_rows": 2264434,
+  "test_rows": 566106,
+  "reused_existing_model": true,
+  "dropped_columns": []
+}
